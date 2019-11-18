@@ -41,15 +41,7 @@
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintRight_toLeftOf="parent" />
 
-        <ImageView
-            android:id="@+id/circle_black_left"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/circle_black"
-            app:layout_constraintLeft_toLeftOf="@id/spacer"
-            app:layout_constraintTop_toTopOf="@id/spacer"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
+
 
         <TextView
             android:id="@+id/namePokemon_textview"
@@ -64,7 +56,7 @@
             app:layout_constraintBottom_toTopOf="@id/idPokemon_textview"
             app:layout_constraintRight_toRightOf="@id/idPokemon_textview"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Borderlands 3" />
+            tools:text="Rayquaza" />
 
         <TextView
             android:id="@+id/idPokemon_textview"
@@ -75,7 +67,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            tools:text="260h de jeu - Installé le 02/02/18" />
+            tools:text="Version Emeraude §§§" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

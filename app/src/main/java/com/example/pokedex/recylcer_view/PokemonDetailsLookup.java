@@ -15,13 +15,6 @@ public class PokemonDetailsLookup extends ItemDetailsLookup<String> {
     }
 
     public ItemDetails<String> getItemDetails(MotionEvent e) {
-        View view = mRecyclerView.findChildViewUnder(e.getX(), e.getY());
-        if (view != null) {
-            RecyclerView.ViewHolder holder = mRecyclerView.getChildViewHolder(view);
-            if (holder instanceof MyDataAdapter.PokemonViewHolder) {
-                return ((MyDataAdapter.PokemonViewHolder) holder).getItemDetails();
-            }
-        }
         return null;
     }
 }

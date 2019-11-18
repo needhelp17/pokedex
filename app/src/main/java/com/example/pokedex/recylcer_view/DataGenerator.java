@@ -9,8 +9,9 @@ public class DataGenerator {
     public static List<PokemonViewModel> generateData(List<Pokemon> pokemons) {
         List<PokemonViewModel> pokemonViewModelList = new ArrayList<>();
 
-        for (Pokemon p : pokemons)
-        pokemonViewModelList.add(new PokemonViewModel(p));
+        for (Pokemon p : pokemons) {
+            pokemonViewModelList.add(new PokemonViewModel(p));
+        }
         return pokemonViewModelList;
     }
 
