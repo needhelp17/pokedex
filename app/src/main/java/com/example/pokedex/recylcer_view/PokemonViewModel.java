@@ -14,7 +14,7 @@ public class PokemonViewModel {
     public PokemonViewModel(Pokemon p) {
         this.name = p.getName();
         this.id = p.getId();
-        this.imageUrl = p.getSprites().getFront_default();
+        this.imageUrl = "coucou";//p.getSprites().getFront_default();
         this.uuid = UUID.randomUUID().toString();
     }
 

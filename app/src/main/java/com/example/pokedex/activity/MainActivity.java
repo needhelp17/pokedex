@@ -1,5 +1,7 @@
 package com.example.pokedex.activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,37 +10,24 @@ import com.example.pokedex.R;
 import com.example.pokedex.entitites.Pokemon;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import java.util.ListIterator;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.recyclerview.selection.ItemDetailsLookup;
-import androidx.recyclerview.selection.ItemKeyProvider;
-import androidx.recyclerview.selection.OnItemActivatedListener;
-import androidx.recyclerview.selection.SelectionPredicates;
-import androidx.recyclerview.selection.SelectionTracker;
-import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.view.ActionMode;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.pokedex.recylcer_view.DataGenerator;
 import com.example.pokedex.recylcer_view.MyDataAdapter;
 import com.example.pokedex.recylcer_view.PokemonActionInterface;
-import com.example.pokedex.recylcer_view.PokemonDetailsLookup;
-import com.example.pokedex.recylcer_view.PokemonItemKeyProvider;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity implements PokemonActionInterface {
@@ -49,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements PokemonActionInte
     private Button button;
     private CoordinatorLayout coordinatorLayout;
     private List<Pokemon> pokemonList;
+    private Boolean recyclerviewLayout = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +46,38 @@ public class MainActivity extends AppCompatActivity implements PokemonActionInte
         setContentView(R.layout.activity_main);
         Pokemon p1 = new Pokemon(1,"pika");
         Pokemon p2 = new Pokemon(2,"sala");
+        pokemonList = new ArrayList<>();
         pokemonList.add(p1);
         pokemonList.add(p2);
-
-        Toast.makeText(this, pokemonList.size(), Toast.LENGTH_SHORT).show();
-        button = findViewById(R.id.button);
         coordinatorLayout = findViewById(R.id.coordinator_layout);
+
         setupRecyclerView();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_mode_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_whatshot:
+                recyclerViewChangeLayout();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void recyclerViewChangeLayout() {
+        if (recyclerviewLayout){
+            layoutManager = new GridLayoutManager(this.getBaseContext(),2);
+        }
+        else{
+            layoutManager = new LinearLayoutManager(this.getBaseContext());
+        }
+        recyclerviewLayout = !recyclerviewLayout;
+        myDataAdapter.setViewchoice(recyclerviewLayout);
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     private void setupRecyclerView() {
@@ -73,14 +88,14 @@ public class MainActivity extends AppCompatActivity implements PokemonActionInte
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this.getBaseContext());
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        myDataAdapter = new MyDataAdapter(this);
+        myDataAdapter = new MyDataAdapter(DataGenerator.generateData(pokemonList),this);
+        myDataAdapter.setViewchoice(false);
         recyclerView.setAdapter(myDataAdapter);
 
-        myDataAdapter.bindViewModels(DataGenerator.generateData(pokemonList));
     }
 
     public void displaySnackBar(String message) {
@@ -91,5 +106,6 @@ public class MainActivity extends AppCompatActivity implements PokemonActionInte
     @Override
     public void onPokemonClicked(String pokemonName) {
         displaySnackBar(pokemonName);
+        //myDataAdapter.notifyDataSetChanged();
     }
 }
