@@ -1,77 +1,100 @@
 package com.example.pokedex.entitites;
 
-public class Sprites
+import java.io.Serializable;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class Sprites implements Serializable
 {
-    public String back_default;
-    public String back_female;
-    public String back_shiny;
-    public String back_shiny_female;
-    public String front_default;
-    public String front_female;
-    public String front_shiny;
-    public String front_shiny_female;
 
-    public String getBack_default() {
-        return back_default;
+    @SerializedName("back_default")
+    @Expose
+    private String backDefault;
+    @SerializedName("back_female")
+    @Expose
+    private Object backFemale;
+    @SerializedName("back_shiny")
+    @Expose
+    private String backShiny;
+    @SerializedName("back_shiny_female")
+    @Expose
+    private Object backShinyFemale;
+    @SerializedName("front_default")
+    @Expose
+    private String frontDefault;
+    @SerializedName("front_female")
+    @Expose
+    private Object frontFemale;
+    @SerializedName("front_shiny")
+    @Expose
+    private String frontShiny;
+    @SerializedName("front_shiny_female")
+    @Expose
+    private Object frontShinyFemale;
+    private final static long serialVersionUID = 4874749218746837660L;
+
+    public String getBackDefault() {
+        return backDefault;
     }
 
-    public void setBack_default(String back_default) {
-        this.back_default = back_default;
+    public void setBackDefault(String backDefault) {
+        this.backDefault = backDefault;
     }
 
-    public String getBack_female() {
-        return back_female;
+    public Object getBackFemale() {
+        return backFemale;
     }
 
-    public void setBack_female(String back_female) {
-        this.back_female = back_female;
+    public void setBackFemale(Object backFemale) {
+        this.backFemale = backFemale;
     }
 
-    public String getBack_shiny() {
-        return back_shiny;
+    public String getBackShiny() {
+        return backShiny;
     }
 
-    public void setBack_shiny(String back_shiny) {
-        this.back_shiny = back_shiny;
+    public void setBackShiny(String backShiny) {
+        this.backShiny = backShiny;
     }
 
-    public String getBack_shiny_female() {
-        return back_shiny_female;
+    public Object getBackShinyFemale() {
+        return backShinyFemale;
     }
 
-    public void setBack_shiny_female(String back_shiny_female) {
-        this.back_shiny_female = back_shiny_female;
+    public void setBackShinyFemale(Object backShinyFemale) {
+        this.backShinyFemale = backShinyFemale;
     }
 
-    public String getFront_default() {
-        return front_default;
+    public String getFrontDefault() {
+        return frontDefault;
     }
 
-    public void setFront_default(String front_default) {
-        this.front_default = front_default;
+    public void setFrontDefault(String frontDefault) {
+        this.frontDefault = frontDefault;
     }
 
-    public String getFront_female() {
-        return front_female;
+    public Object getFrontFemale() {
+        return frontFemale;
     }
 
-    public void setFront_female(String front_female) {
-        this.front_female = front_female;
+    public void setFrontFemale(Object frontFemale) {
+        this.frontFemale = frontFemale;
     }
 
-    public String getFront_shiny() {
-        return front_shiny;
+    public String getFrontShiny() {
+        return frontShiny;
     }
 
-    public void setFront_shiny(String front_shiny) {
-        this.front_shiny = front_shiny;
+    public void setFrontShiny(String frontShiny) {
+        this.frontShiny = frontShiny;
     }
 
-    public String getFront_shiny_female() {
-        return front_shiny_female;
+    public Object getFrontShinyFemale() {
+        return frontShinyFemale;
     }
 
-    public void setFront_shiny_female(String front_shiny_female) {
-        this.front_shiny_female = front_shiny_female;
+    public void setFrontShinyFemale(Object frontShinyFemale) {
+        this.frontShinyFemale = frontShinyFemale;
     }
+
 }

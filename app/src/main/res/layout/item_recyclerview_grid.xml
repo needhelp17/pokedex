@@ -74,7 +74,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/icon_imageview"
-            tools:text="Version Emeraude §§§" />
+            tools:text="212" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
