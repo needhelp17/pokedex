@@ -3,6 +3,7 @@ package com.example.pokedex.activity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.pokedex.R;
@@ -95,20 +96,23 @@ public class MainActivity extends AppCompatActivity implements PokemonActionInte
 
         // specify an adapter (see also next example)
         myDataAdapter = new MyDataAdapter(DataGenerator.generateData(pokemonList),this);
-        //myDataAdapter.setViewchoice(true);
         recyclerView.setAdapter(myDataAdapter);
 
     }
 
     public void displaySnackBar(String message) {
-        System.out.println("cccccccccccccccccccccccccccccccccccccccccccccccccccc");
         Snackbar.make(layout, message, Snackbar.LENGTH_LONG)
                 .show();
     }
 
     @Override
-    public void onPokemonClicked(String pokemonName) {
+    public void onPokemonClicked(String pokemonName,String id_string) {
         displaySnackBar(pokemonName);
+        int id = Integer.valueOf(id_string);
+        Intent showPoke = new Intent(this,PokemonShowActivity.class);
+        showPoke.putExtra("id",id);
+        showPoke.putExtra("name",pokemonName);
+        startActivity(showPoke);
         //myDataAdapter.notifyDataSetChanged();
     }
 

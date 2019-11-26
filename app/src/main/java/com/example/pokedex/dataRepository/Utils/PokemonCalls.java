@@ -1,5 +1,7 @@
 package com.example.pokedex.dataRepository.Utils;
 
+import android.app.Activity;
+
 import androidx.annotation.Nullable;
 
 import com.example.pokedex.activity.MainActivity;
@@ -32,6 +34,33 @@ public class PokemonCalls {
 
         // 2.3 - Create the call on Github API
         Call<Pokemon> call = pokemonService.getPokemonByName(pokemonName);
+        // 2.4 - Start the call
+        call.enqueue(new Callback<Pokemon>() {
+
+            @Override
+            public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
+                // 2.5 - Call the proper callback used in controller (MainFragment)
+                if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onResponse(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Pokemon> call, Throwable t) {
+                // 2.5 - Call the proper callback used in controller (MainFragment)
+                if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
+            }
+        });
+    }
+
+    public static void fetchPokemonById(Activity callbacks, int pokemonId){
+
+        // 2.1 - Create a weak reference to callback (avoid memory leaks)
+        final WeakReference<CallbacksSimple> callbacksWeakReference = new WeakReference<CallbacksSimple>((CallbacksSimple) callbacks);
+
+        // 2.2 - Get a Retrofit instance and the related endpoints
+        PokemonService pokemonService = PokemonService.retrofit.create(PokemonService.class);
+
+        // 2.3 - Create the call on Github API
+        Call<Pokemon> call = pokemonService.getPokemonById(pokemonId);
         // 2.4 - Start the call
         call.enqueue(new Callback<Pokemon>() {
 

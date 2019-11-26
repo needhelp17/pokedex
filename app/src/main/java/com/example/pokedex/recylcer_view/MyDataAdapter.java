@@ -17,11 +17,12 @@ import com.example.pokedex.R;
 import java.util.Collections;
 import java.util.List;
 
-public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.PokemonViewHolder> {
+public class MyDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<PokemonViewModel> pokemonViewModelList;
-    private PokemonActionInterface pokemonActionInterface;
+    private static PokemonActionInterface pokemonActionInterface;
     private Boolean viewchoice = true;
+
 
     public Boolean getViewchoice() {
         return viewchoice;
@@ -29,6 +30,7 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.PokemonVie
 
     public void setViewchoice(Boolean viewchoice) {
         this.viewchoice = viewchoice;
+        notifyDataSetChanged();
     }
 
 
@@ -42,18 +44,40 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.PokemonVie
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyDataAdapter.PokemonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        //if (getViewchoice()) {
+        if (getViewchoice()) {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_recyclerview, parent, false);
-            PokemonViewHolder pokemonViewHolder = new PokemonViewHolder(v);
+            PokemonViewHolderLinear pokemonViewHolder = new PokemonViewHolderLinear(v);
             return pokemonViewHolder;
+        }
+        else {
+            View v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_recyclerview_grid, parent, false);
+            PokemonViewHolderGrid pokemonViewHolder = new PokemonViewHolderGrid(v);
+            return pokemonViewHolder;
+        }
+    }
+    @Override
+    public int getItemViewType(final int position){
+        return getViewchoice() ? R.layout.item_recyclerview:R.layout.item_recyclerview_grid;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PokemonViewHolder holder, int position) {
-        holder.updatePokemon(pokemonViewModelList.get(position));
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if(getViewchoice()){
+            if (holder instanceof PokemonViewHolderLinear) {
+                PokemonViewHolderLinear holder1 = (PokemonViewHolderLinear) holder;
+                holder1.updatePokemon(pokemonViewModelList.get(position));
+            }
+        }
+        else {
+            if (holder instanceof PokemonViewHolderGrid){
+                PokemonViewHolderGrid holder1 = (PokemonViewHolderGrid) holder;
+                holder1.updatePokemon(pokemonViewModelList.get(position));
+            }
+        }
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -77,7 +101,16 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.PokemonVie
 
 
 
-    public static class PokemonViewHolder extends RecyclerView.ViewHolder {
+
+
+
+
+
+
+
+
+
+    public static class PokemonViewHolderLinear extends RecyclerView.ViewHolder {
         private TextView nameTextView;
         private TextView idTextView;
         private ImageView iconImageView;
@@ -86,35 +119,81 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.PokemonVie
         //private PokemonActionInterface pokemonActionInterface;
 
 
-        public PokemonViewHolder(View v) {
+        public PokemonViewHolderLinear(View v) {
             super(v);
             this.v = v;
             nameTextView = v.findViewById(R.id.namePokemon_textview);
             idTextView = v.findViewById(R.id.idPokemon_textview);
             iconImageView = v.findViewById(R.id.icon_imageview);
             pokemonButton = v.findViewById(R.id.pokemon_button);
-            //setupListeners();
+            setupListeners();
 
         }
 
         public void updatePokemon(PokemonViewModel pokemonViewModel) {
             nameTextView.setText(pokemonViewModel.getName());
             idTextView.setText(String.valueOf(pokemonViewModel.getId()));
-            System.out.println("coucoooooooooooooooooooooooooooooooooooooou" +pokemonViewModel.getImageUrl());
             Glide.with(v)
                     .load(pokemonViewModel.getImageUrl())
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(iconImageView);
         }
 
-        /*private void setupListeners(){
+        private void setupListeners(){
             pokemonButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pokemonActionInterface.onPokemonClicked(pokemonViewModel.getName());
+                    pokemonActionInterface.onPokemonClicked(nameTextView.getText().toString(),idTextView.getText().toString());
                 }
             });
-        }*/
+        }
+
+    }
+
+
+
+
+
+
+
+
+    public static class PokemonViewHolderGrid extends RecyclerView.ViewHolder {
+        private TextView nameTextView;
+        private TextView idTextView;
+        private ImageView iconImageView;
+        private ImageButton pokemonButton;
+        private View v;
+        //private PokemonActionInterface pokemonActionInterface;
+
+
+        public PokemonViewHolderGrid(View v) {
+            super(v);
+            this.v = v;
+            nameTextView = v.findViewById(R.id.namePokemon_textview);
+            idTextView = v.findViewById(R.id.idPokemon_textview);
+            iconImageView = v.findViewById(R.id.icon_imageview);
+            pokemonButton = v.findViewById(R.id.pokemon_button);
+            setupListeners();
+
+        }
+
+        public void updatePokemon(PokemonViewModel pokemonViewModel) {
+            nameTextView.setText(pokemonViewModel.getName());
+            idTextView.setText(String.valueOf(pokemonViewModel.getId()));
+            Glide.with(v)
+                    .load(pokemonViewModel.getImageUrl())
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(iconImageView);
+        }
+
+        private void setupListeners(){
+            pokemonButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pokemonActionInterface.onPokemonClicked(nameTextView.getText().toString(),idTextView.getText().toString());
+                }
+            });
+        }
 
     }
 }
