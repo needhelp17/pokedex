@@ -1,15 +1,13 @@
 package com.example.pokedex.dataRepository.Utils;
 
-import android.app.Activity;
-
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.pokedex.activity.MainActivity;
 import com.example.pokedex.dataRepository.PokemonService;
 import com.example.pokedex.entitites.Pokemon;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,7 +49,7 @@ public class PokemonCalls {
         });
     }
 
-    public static void fetchPokemonById(Activity callbacks, int pokemonId){
+    public static void fetchPokemonById(Fragment callbacks, int pokemonId){
 
         // 2.1 - Create a weak reference to callback (avoid memory leaks)
         final WeakReference<CallbacksSimple> callbacksWeakReference = new WeakReference<CallbacksSimple>((CallbacksSimple) callbacks);

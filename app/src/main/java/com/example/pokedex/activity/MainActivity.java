@@ -7,16 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.pokedex.R;
-import com.example.pokedex.dataRepository.PokemonService;
-import com.example.pokedex.dataRepository.Utils.Callbacks;
+import com.example.pokedex.activity.showPokemon.PokemonShowActivity;
 import com.example.pokedex.dataRepository.Utils.NetworkAsyncTask;
 import com.example.pokedex.dataRepository.Utils.PokemonCalls;
 import com.example.pokedex.dataRepository.Utils.PokemonsCalls;
 import com.example.pokedex.entitites.Pokemon;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -109,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements PokemonActionInte
     public void onPokemonClicked(String pokemonName,String id_string) {
         displaySnackBar(pokemonName);
         int id = Integer.valueOf(id_string);
-        Intent showPoke = new Intent(this,PokemonShowActivity.class);
+        Intent showPoke = new Intent(this, PokemonShowActivity.class);
         showPoke.putExtra("id",id);
         showPoke.putExtra("name",pokemonName);
         startActivity(showPoke);

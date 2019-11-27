@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_preview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activity.showPokemon.fragment.FragmentShowDetails">
 
 
     <ImageView
@@ -19,7 +20,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.196"
-        app:srcCompat="@drawable/rayquaza" />
+        app:srcCompat="@drawable/rayquaza" >
+
+    <ImageButton
+        android:id="@+id/pokemon_image_switch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    </ImageView>
 
     <TextView
         android:id="@+id/pokemonName"
