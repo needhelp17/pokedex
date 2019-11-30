@@ -34,7 +34,9 @@ public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Li
     private ImageView image;
 
     public FragmentShowDetails(int id) {
-        PokemonCalls.fetchPokemonById(this,id);
+        if(id!=0){
+            PokemonCalls.fetchPokemonById(this,id);
+        }
     }
 
     public static FragmentShowDetails newInstance(int id) {
@@ -45,7 +47,8 @@ public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Li
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //rootView = inflater.from(container.getContext()).inflate(R.layout.fragment_preview, null);
-        rootView = inflater.inflate(R.layout.fragment_preview,container, false);
+        //rootView = inflater.inflate(R.layout.fragment_preview,container, false);
+        rootView = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_preview, null);
         nameText = rootView.findViewById(R.id.pokemonName);
         idText = rootView.findViewById(R.id.pokemonId);
         descText = rootView.findViewById(R.id.pokemonDescription);
@@ -62,9 +65,8 @@ public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Li
     @Override
     public void onStart() {
         super.onStart();
-        Button b = rootView.findViewById(R.id.pokemon_image_switch);
         img = rootView.findViewById(R.id.pokemonImage);
-        b.setOnClickListener(new View.OnClickListener(){
+        img.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 if(front) {

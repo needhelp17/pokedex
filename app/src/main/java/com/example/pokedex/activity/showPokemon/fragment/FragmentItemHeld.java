@@ -38,9 +38,8 @@ public class FragmentItemHeld extends Fragment implements  NetworkAsyncTask.List
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //rootView = inflater.from(container.getContext()).inflate(R.layout.fragment_item, null);
         rootView = inflater.inflate(R.layout.fragment_item, container, false);
-        System.out.println("coucouc");
+        tv = rootView.findViewById(R.id.item);
         return rootView;
 
     }
@@ -53,12 +52,6 @@ public class FragmentItemHeld extends Fragment implements  NetworkAsyncTask.List
     @Override
     public void onStart() {
         super.onStart();
-        tv = rootView.findViewById(R.id.item);
-        String str = p.getName();
-        for (HeldItem i : p.getHeldItems()) {
-            str.concat(i.getItem().getName() + "\n");
-        }
-        tv.setText(str);
     }
 
     @Override
@@ -83,10 +76,14 @@ public class FragmentItemHeld extends Fragment implements  NetworkAsyncTask.List
 
     @Override
     public void onResponse(@Nullable Pokemon pokemon) {
-        if (pokemon!=null){
+        if (pokemon!=null) {
             p = pokemon;
+            String str = "";
+            for (HeldItem i : p.getHeldItems()) {
+                str.concat(i.getItem().getName()+" ");
+            }
+            tv.setText(str);
         }
-
     }
 
     @Override
