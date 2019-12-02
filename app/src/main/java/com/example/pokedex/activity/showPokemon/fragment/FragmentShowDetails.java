@@ -1,14 +1,12 @@
 package com.example.pokedex.activity.showPokemon.fragment;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -19,7 +17,11 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.pokedex.R;
 import com.example.pokedex.dataRepository.Utils.NetworkAsyncTask;
 import com.example.pokedex.dataRepository.Utils.PokemonCalls;
+import com.example.pokedex.entitites.GameIndex;
 import com.example.pokedex.entitites.Pokemon;
+import com.example.pokedex.entitites.Type;
+import com.example.pokedex.entitites.Version;
+import com.google.android.material.chip.Chip;
 
 public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Listeners, PokemonCalls.CallbacksSimple {
 
@@ -30,8 +32,12 @@ public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Li
     private Pokemon p;
     private TextView nameText;
     private TextView idText;
-    private TextView descText;
-    private ImageView image;
+    private TextView type1Text;
+    private TextView type2Text;
+    private TextView heighText;
+    private TextView weightText;
+    private TextView versionText;
+    private Switch shinySwitch;
 
     public FragmentShowDetails(int id) {
         if(id!=0){
@@ -46,13 +52,15 @@ public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Li
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //rootView = inflater.from(container.getContext()).inflate(R.layout.fragment_preview, null);
-        //rootView = inflater.inflate(R.layout.fragment_preview,container, false);
         rootView = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_preview, null);
         nameText = rootView.findViewById(R.id.pokemonName);
         idText = rootView.findViewById(R.id.pokemonId);
-        descText = rootView.findViewById(R.id.pokemonDescription);
-        image = rootView.findViewById(R.id.pokemonImage);
+        heighText = rootView.findViewById(R.id.pokemonHeigh);
+        weightText = rootView.findViewById(R.id.pokemonWeigth);
+        img = rootView.findViewById(R.id.pokemonImage);
+        type1Text = rootView.findViewById(R.id.pokemonType1);
+        versionText = rootView.findViewById(R.id.pokemonVersion);
+        shinySwitch = rootView.findViewById(R.id.pokemonShiny);
         return rootView;
 
     }
@@ -69,23 +77,49 @@ public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Li
         img.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if(front) {
-                    Glide.with(v)
-                            .load(p.getSprites().getBackDefault())
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .into(img);
-                    front = !front;
-                }
-                else{
-                    Glide.with(v)
-                            .load(p.getSprites().getFrontDefault())
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .into(img);
-                    front = !front;
-                }
+                changeImg(img,false);
+            }
+        });
+        shinySwitch.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                changeImg(img,true);
             }
         });
     }
+
+    public void changeImg(View v, Boolean is_shiny){
+        System.out.println("value of front : " + front + "   value of shiny : "+shinySwitch.isChecked() +" value of is_shiny : "+is_shiny);
+        String url_to_set = "";
+        if (!is_shiny){
+            front=!front;
+        }
+        if(front){
+            if(shinySwitch.isChecked()){
+                url_to_set = p.getSprites().getFrontShiny();
+            }
+            else{
+                url_to_set = p.getSprites().getFrontDefault();
+            }
+        }
+        else{
+            if(shinySwitch.isChecked()){
+                url_to_set = p.getSprites().getBackShiny();
+            }
+            else{
+                url_to_set = p.getSprites().getBackDefault();
+            }
+        }
+
+
+        Glide.with(v)
+                .load(url_to_set)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(img);
+
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -112,14 +146,23 @@ public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Li
         if (pokemon!=null){
             p = pokemon;
             nameText.setText(p.getName());
-            idText.setText(String.valueOf(p.getId()));
-            descText.setText(p.getLocationAreaEncounters());
-            Glide.with(this)
-                    .load(p.getSprites().getFrontDefault())
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(image);
+            idText.setText("No. "+String.valueOf(p.getId()));
+            heighText.setText("Heigh : "+p.getHeight());
+            weightText.setText("Weight : "+p.getWeight());
+            String type="";
+            for (Type t: p.getTypes()){
+                type += t.getType().getName()+"   ";
+            }
+            type1Text.setText(type);
+            //type2Text = rootView.findViewById(R.id.pokemonType2);
+            String version="";
+            for (GameIndex gi : p.getGameIndices()){
+                version +=gi.getVersion().getName()+", ";
+            }
+            version = version.substring(0,version.length()-1);
+            versionText.setText("Version : "+version);
+            changeImg(img,true);
         }
-
     }
 
     @Override
