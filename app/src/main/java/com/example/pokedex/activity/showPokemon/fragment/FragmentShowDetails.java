@@ -1,10 +1,14 @@
 package com.example.pokedex.activity.showPokemon.fragment;
 
 import android.content.Context;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -17,23 +21,23 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.pokedex.R;
 import com.example.pokedex.dataRepository.Utils.NetworkAsyncTask;
 import com.example.pokedex.dataRepository.Utils.PokemonCalls;
-import com.example.pokedex.entitites.GameIndex;
-import com.example.pokedex.entitites.Pokemon;
-import com.example.pokedex.entitites.Type;
-import com.example.pokedex.entitites.Version;
-import com.google.android.material.chip.Chip;
+import com.example.pokedex.dataRepository.entitites.GameIndex;
+import com.example.pokedex.dataRepository.entitites.Pokemon;
+import com.example.pokedex.dataRepository.entitites.Type;
+import com.example.pokedex.presenter.Presenter;
 
 public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Listeners, PokemonCalls.CallbacksSimple {
 
     public static final String TAB_NAME = "Détail";
+    private Presenter presenter;
     private View rootView;
     private boolean front = true;
     private ImageView img;
     private Pokemon p;
     private TextView nameText;
     private TextView idText;
-    private TextView type1Text;
-    private TextView type2Text;
+    private Button type1Text;
+    private Button type2Text;
     private TextView heighText;
     private TextView weightText;
     private TextView versionText;
@@ -52,13 +56,15 @@ public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Li
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        presenter = new Presenter();
         rootView = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_preview, null);
         nameText = rootView.findViewById(R.id.pokemonName);
         idText = rootView.findViewById(R.id.pokemonId);
         heighText = rootView.findViewById(R.id.pokemonHeigh);
         weightText = rootView.findViewById(R.id.pokemonWeigth);
         img = rootView.findViewById(R.id.pokemonImage);
-        type1Text = rootView.findViewById(R.id.pokemonType1);
+        type1Text = rootView.findViewById(R.id.buttonType1);
+        type2Text = rootView.findViewById(R.id.buttonType2);
         versionText = rootView.findViewById(R.id.pokemonVersion);
         shinySwitch = rootView.findViewById(R.id.pokemonShiny);
         return rootView;
@@ -149,18 +155,25 @@ public class FragmentShowDetails extends Fragment implements NetworkAsyncTask.Li
             idText.setText("No. "+String.valueOf(p.getId()));
             heighText.setText("Heigh : "+p.getHeight());
             weightText.setText("Weight : "+p.getWeight());
-            String type="";
-            for (Type t: p.getTypes()){
-                type += t.getType().getName()+"   ";
+            type1Text.setText(p.getTypes().get(0).getType().getName());
+            int color = presenter.getColorType(p.getTypes().get(0).getType().getName());
+            type1Text.setBackgroundColor(color);
+            if(p.getTypes().size()>1){
+                type2Text.setText(p.getTypes().get(1).getType().getName());
+                int color2 = presenter.getColorType(p.getTypes().get(1).getType().getName());
+                type2Text.setBackgroundColor(color2);
+                System.out.println(color2);
             }
-            type1Text.setText(type);
-            //type2Text = rootView.findViewById(R.id.pokemonType2);
+            else {
+                type2Text.setText("");
+                type2Text.setVisibility(View.INVISIBLE);
+            }
             String version="";
             for (GameIndex gi : p.getGameIndices()){
                 version +=gi.getVersion().getName()+", ";
             }
             version = version.substring(0,version.length()-1);
-            versionText.setText("Version : "+version);
+            versionText.setText("Originial Version  : "+p.getGameIndices().get(p.getGameIndices().size()-1).getVersion().getName());
             changeImg(img,true);
         }
     }

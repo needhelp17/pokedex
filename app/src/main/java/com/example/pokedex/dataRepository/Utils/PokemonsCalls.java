@@ -3,8 +3,8 @@ package com.example.pokedex.dataRepository.Utils;
 import androidx.annotation.Nullable;
 
 import com.example.pokedex.dataRepository.PokemonService;
-import com.example.pokedex.entitites.Pokemon;
-import com.example.pokedex.entitites.ResultsPokemons;
+import com.example.pokedex.dataRepository.entitites.Pokemon;
+import com.example.pokedex.dataRepository.entitites.ResultsPokemons;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

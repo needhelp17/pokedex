@@ -1,9 +1,7 @@
 package com.example.pokedex.dataRepository;
 
-import com.example.pokedex.entitites.Pokemon;
-import com.example.pokedex.entitites.ResultsPokemons;
-
-import java.util.List;
+import com.example.pokedex.dataRepository.entitites.Pokemon;
+import com.example.pokedex.dataRepository.entitites.ResultsPokemons;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;

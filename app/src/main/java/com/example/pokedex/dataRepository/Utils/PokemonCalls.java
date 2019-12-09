@@ -3,9 +3,9 @@ package com.example.pokedex.dataRepository.Utils;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.pokedex.activity.MainActivity;
+import com.example.pokedex.activity.homeActivity.MainActivity;
 import com.example.pokedex.dataRepository.PokemonService;
-import com.example.pokedex.entitites.Pokemon;
+import com.example.pokedex.dataRepository.entitites.Pokemon;
 
 import java.lang.ref.WeakReference;
 

@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.pokedex.R;
 import com.example.pokedex.activity.showPokemon.fragment.FragmentItemHeld;
 import com.example.pokedex.activity.showPokemon.fragment.FragmentShowDetails;
-import com.example.pokedex.entitites.Pokemon;
+import com.example.pokedex.dataRepository.entitites.Pokemon;
 import com.google.android.material.snackbar.Snackbar;
 
 
