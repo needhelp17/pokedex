@@ -32,7 +32,7 @@ import com.example.pokedex.activity.homeActivity.recylcer_view.MyDataAdapter;
 import com.example.pokedex.activity.homeActivity.recylcer_view.PokemonActionInterface;
 import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity implements PokemonActionInterface, NetworkAsyncTask.Listeners, PokemonsCalls.Callbacks, PokemonCalls.CallbacksSimple {
+public class HomeActivity extends AppCompatActivity implements PokemonActionInterface, PokemonsCalls.Callbacks, PokemonCalls.CallbacksSimple {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -161,23 +161,6 @@ public class MainActivity extends AppCompatActivity implements PokemonActionInte
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
-
-    @Override
-    public void onPreExecute() {
-        this.updateUIWhenStartingHTTPRequest();
-    }
-
-    @Override
-    public void doInBackground() { }
-
-    @Override
-    public void onPostExecute(String json) {
-        this.updateUIWhenStopingHTTPRequest(json);
-    }
-
-    // ------------------
-    //  UPDATE UI
-    // ------------------
 
     private void updateUIWhenStartingHTTPRequest(){
         this.textView.setText("Downloading...");

@@ -16,7 +16,7 @@ import com.example.pokedex.dataRepository.Utils.PokemonCalls;
 import com.example.pokedex.dataRepository.entitites.HeldItem;
 import com.example.pokedex.dataRepository.entitites.Pokemon;
 
-public class FragmentItemHeld extends Fragment implements  NetworkAsyncTask.Listeners, PokemonCalls.CallbacksSimple{
+public class FragmentItemHeld extends Fragment implements  PokemonCalls.CallbacksSimple{
 
     public static final String TAB_NAME = "Item";
     private View rootView;
@@ -53,21 +53,6 @@ public class FragmentItemHeld extends Fragment implements  NetworkAsyncTask.List
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-    }
-
-    @Override
-    public void onPreExecute() {
-
-    }
-
-    @Override
-    public void doInBackground() {
-
-    }
-
-    @Override
-    public void onPostExecute(String success) {
-
     }
 
     @Override

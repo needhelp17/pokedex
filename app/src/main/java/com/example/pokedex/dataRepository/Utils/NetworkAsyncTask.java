@@ -36,6 +36,6 @@ public class NetworkAsyncTask extends android.os.AsyncTask<String, Void, String>
     protected String doInBackground(String... url) {
         this.callback.get().doInBackground();
         Log.e("TAG", "AsyncTask doing some big work...");
-        return MyHttpURLConnection.startHttpRequest(url[0]);
+        return "200";
     }
 }

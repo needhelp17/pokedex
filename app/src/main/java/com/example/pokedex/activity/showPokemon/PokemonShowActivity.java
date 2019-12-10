@@ -27,11 +27,9 @@ public class PokemonShowActivity extends AppCompatActivity {
         setContentView(R.layout.show_detail_activity);
         Intent i = getIntent();
         id = i.getIntExtra("id",0);
-        name = i.getStringExtra("name");
         setupViewPagerAndTabs();
 
     }
-
 
     public void displaySnackBar(String message) {
         Snackbar.make(findViewById(R.id.show_detail_activity),message,Snackbar.LENGTH_LONG)

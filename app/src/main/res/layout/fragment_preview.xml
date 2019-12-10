@@ -43,22 +43,21 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayoutCompat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toEndOf="@+id/linearLayoutCompat"
         app:layout_constraintTop_toTopOf="@+id/linearLayoutCompat"
-        app:layout_constraintVertical_bias="0.299" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/pokemonHeigh"
-        android:layout_width="99dp"
-        android:layout_height="20dp"
+        android:layout_width="166dp"
+        android:layout_height="31dp"
         android:text="Heigh : 3.0 m"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokemonShiny"
-        app:layout_constraintVertical_bias="0.334" />
+        app:layout_constraintVertical_bias="0.089" />
 
     <TextView
         android:id="@+id/pokemonId"
@@ -68,35 +67,36 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayoutCompat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toEndOf="@+id/linearLayoutCompat"
         app:layout_constraintTop_toTopOf="@+id/linearLayoutCompat"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.385" />
 
     <TextView
         android:id="@+id/pokemonWeigth"
-        android:layout_width="65dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
+        android:layout_width="161dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="220dp"
+        android:layout_marginRight="220dp"
         android:text="212.0 Kg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toEndOf="@+id/pokemonHeigh"
-        app:layout_constraintTop_toBottomOf="@+id/pokemonShiny"
-        app:layout_constraintVertical_bias="0.331" />
+        app:layout_constraintEnd_toEndOf="@+id/pokemonHeigh"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/pokemonHeigh"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonHeigh"
+        app:layout_constraintVertical_bias="0.09" />
 
     <TextView
         android:id="@+id/pokemonVersion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_width="197dp"
+        android:layout_height="36dp"
         android:text="Origin Version : Emeraude"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.219"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemonHeigh"/>
+        app:layout_constraintTop_toBottomOf="@+id/pokemonWeigth"
+        app:layout_constraintVertical_bias="0.101" />
 
     <Switch
         android:id="@+id/pokemonShiny"
@@ -109,23 +109,47 @@
 
     <Button
         android:id="@+id/buttonType1"
-        android:layout_width="85dp"
-        android:layout_height="37dp"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
         android:layout_marginTop="32dp"
+        android:radius="5dp"
         android:text="dragon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toEndOf="@+id/linearLayoutCompat"
-        app:layout_constraintTop_toBottomOf="@+id/pokemonName"
-        android:radius="5dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/pokemonId" />
 
     <Button
         android:id="@+id/buttonType2"
-        android:layout_width="85dp"
-        android:layout_height="39dp"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
         android:text="dragon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayoutCompat"
         app:layout_constraintTop_toBottomOf="@+id/buttonType1" />
+
+    <Button
+        android:id="@+id/buttonprevious"
+        android:layout_width="171dp"
+        android:layout_height="73dp"
+        android:text="previous Pokemon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonnext"
+        app:layout_constraintHorizontal_bias="0.603"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonVersion"
+        app:layout_constraintVertical_bias="0.233" />
+
+    <Button
+        android:id="@+id/buttonnext"
+        android:layout_width="171dp"
+        android:layout_height="73dp"
+        android:text="Next Pokemon"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonprevious"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonprevious"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

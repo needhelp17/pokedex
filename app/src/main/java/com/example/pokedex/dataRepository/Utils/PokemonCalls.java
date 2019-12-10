@@ -3,7 +3,7 @@ package com.example.pokedex.dataRepository.Utils;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.pokedex.activity.homeActivity.MainActivity;
+import com.example.pokedex.activity.homeActivity.HomeActivity;
 import com.example.pokedex.dataRepository.PokemonService;
 import com.example.pokedex.dataRepository.entitites.Pokemon;
 
@@ -22,7 +22,7 @@ public class PokemonCalls {
     }
 
     // 2 - Public method to start fetching users following by Jake Wharton
-    public static void fetchPokemonByName(MainActivity callbacks, String pokemonName){
+    public static void fetchPokemonByName(HomeActivity callbacks, String pokemonName){
 
         // 2.1 - Create a weak reference to callback (avoid memory leaks)
         final WeakReference<CallbacksSimple> callbacksWeakReference = new WeakReference<CallbacksSimple>(callbacks);
