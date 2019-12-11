@@ -1,4 +1,4 @@
-package com.example.pokedex.dataRepository.Utils;
+package com.example.pokedex.dataRepository.pokemonService;
 
 public interface Callbacks {
     void onResponse();

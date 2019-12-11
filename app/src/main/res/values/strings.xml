@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Pokedex</string>
     <string name="whatshot_clicked">coucou</string>
+    <string name="statsText">Stats</string>
+    <string name="encountersText">Encounters Area</string>
+    <string name="versionEncounter">Red</string>
 </resources>

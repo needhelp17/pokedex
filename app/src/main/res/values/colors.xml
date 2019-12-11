@@ -2,8 +2,11 @@
 <resources>
     <color name="colorPrimary">#EB2224</color>
     <color name="colorPrimaryDark">#BB0A0C</color>
+    <color name="colorTextAndIdItemRecyclerview">#F80C0F</color>
+    <color name="colorTableLight">#EB8687</color>
+    <color name="colorTableDark">#B5F80C0F</color>
     <color name="colorBorder">#BB0A0C</color>
-    <color name="colorAccent">#FF8C00</color>
+    <color name="colorAccent">#BB0A0C</color>
     <color name="colorSteel">#5F5C59</color>
     <color name="colorGrass">#4CAF50</color>
     <color name="colorFire">#F19B1C</color>
@@ -22,4 +25,5 @@
     <color name="colorNormal">#F5D8B5</color>
     <color name="colorFairy">#F57AA5</color>
     <color name="colorElectrik">#FFC107</color>
+    <color name="colorTextButtonNextAndPrevious">#FFFFFF</color>
 </resources>

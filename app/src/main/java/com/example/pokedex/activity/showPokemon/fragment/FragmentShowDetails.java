@@ -1,10 +1,6 @@
 package com.example.pokedex.activity.showPokemon.fragment;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +16,9 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.pokedex.R;
-import com.example.pokedex.activity.showPokemon.PokemonShowActivity;
-import com.example.pokedex.dataRepository.Utils.NetworkAsyncTask;
-import com.example.pokedex.dataRepository.Utils.PokemonCalls;
+import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonCalls;
 import com.example.pokedex.dataRepository.entitites.GameIndex;
 import com.example.pokedex.dataRepository.entitites.Pokemon;
-import com.example.pokedex.dataRepository.entitites.Type;
 import com.example.pokedex.presenter.Presenter;
 
 public class FragmentShowDetails extends Fragment implements PokemonCalls.CallbacksSimple {
@@ -166,17 +159,32 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
             version = version.substring(0, version.length() - 1);
             versionText.setText("Originial Version  : " + p.getGameIndices().get(p.getGameIndices().size() - 1).getVersion().getName());
             changeImg(img, true);
-            final FragmentShowDetails a = this;
+            final FragmentShowDetails thisfragment = this;
+
             buttonNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PokemonCalls.fetchPokemonById(a, getNext(p.getId()));
+                    PokemonCalls.fetchPokemonById(thisfragment, getNext(p.getId()));
+                    for (Fragment f :getActivity().getSupportFragmentManager().getFragments()){
+                        if(f.getClass() != thisfragment.getClass()){
+                            if (f instanceof FragmentStatAndCatch){
+                                ((FragmentStatAndCatch) f).reload(p.getId());
+                            }
+                        }
+                    }
                 }
             });
             buttonPrevious.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PokemonCalls.fetchPokemonById(a, getPrevious(p.getId()));
+                    PokemonCalls.fetchPokemonById(thisfragment, getPrevious(p.getId()));
+                    for (Fragment f :getActivity().getSupportFragmentManager().getFragments()){
+                        if(f.getClass() != thisfragment.getClass()){
+                            if (f instanceof FragmentStatAndCatch){
+                                ((FragmentStatAndCatch) f).reload(p.getId());
+                            }
+                        }
+                    }
                 }
             });
         }

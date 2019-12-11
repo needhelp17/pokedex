@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="2"
+        android:padding="10dp">
+
+        <TableRow
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/defaultStat"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Stat"
+                android:padding="3dp"
+                android:textColor="@color/colorTextButtonNextAndPrevious"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/defaultValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorTextButtonNextAndPrevious"
+                android:padding="3dp"
+                android:text="Value" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/statHp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="Hp" />
+
+            <TextView
+                android:id="@+id/statHpValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="0" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/statAttack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="Attack" />
+
+            <TextView
+                android:id="@+id/statAttackValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="0" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/statDefense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="Defense" />
+
+            <TextView
+                android:id="@+id/statDefenseValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="0" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/statSpeAttack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Special Attack"
+                android:padding="3dp"/>
+
+            <TextView
+                android:id="@+id/statSpeAttackValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="0" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/statSpeDefense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="Special Defense" />
+
+            <TextView
+                android:id="@+id/statSpeDefenseValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="0" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/statSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="Speed" />
+
+            <TextView
+                android:id="@+id/statSpeedValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:text="0" />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

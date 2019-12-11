@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="160dp"
+    android:layout_width="155dp"
     android:layout_height="150dp"
     android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/icon_imageview"
-            android:layout_width="87dp"
-            android:layout_height="56dp"
+            android:layout_width="89dp"
+            android:layout_height="77dp"
             android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,17 +54,15 @@
             android:id="@+id/namePokemon_textview"
             android:layout_width="wrap_content"
             android:layout_height="23dp"
-            android:layout_marginTop="24dp"
             android:textAllCaps="true"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorTextAndIdItemRecyclerview"
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.771"
+            app:layout_constraintHorizontal_bias="0.753"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/icon_imageview"
-            app:layout_constraintVertical_bias="0.064"
             tools:text="Rayquaza" />
 
         <TextView
@@ -73,13 +71,12 @@
             android:layout_height="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/colorTextAndIdItemRecyclerview"
+            app:layout_constraintBottom_toBottomOf="@+id/pokemon_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/icon_imageview"
-            app:layout_constraintVertical_bias="0.448"
             tools:text="212" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

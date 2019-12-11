@@ -9,17 +9,14 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.pokedex.R;
-import com.example.pokedex.activity.showPokemon.fragment.FragmentItemHeld;
+import com.example.pokedex.activity.showPokemon.fragment.FragmentStatAndCatch;
 import com.example.pokedex.activity.showPokemon.fragment.FragmentShowDetails;
-import com.example.pokedex.dataRepository.entitites.Pokemon;
 import com.google.android.material.snackbar.Snackbar;
 
 
 public class PokemonShowActivity extends AppCompatActivity {
     private int id;
-    private String name;
     private ViewPager viewPager;
-    private Pokemon p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +35,13 @@ public class PokemonShowActivity extends AppCompatActivity {
 
     private void setupViewPagerAndTabs() {
         final FragmentShowDetails fragmentShowDetails = new FragmentShowDetails(id);
-        final FragmentItemHeld fragmentItemHeld = new FragmentItemHeld(id);
+        final FragmentStatAndCatch fragmentStatAndCatch = new FragmentStatAndCatch(id);
         viewPager = findViewById(R.id.tab_viewpager);
 
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return (position==1) ? fragmentItemHeld : fragmentShowDetails;
+                return (position==1) ? fragmentStatAndCatch : fragmentShowDetails;
             }
 
 
@@ -58,7 +55,7 @@ public class PokemonShowActivity extends AppCompatActivity {
                 if (position == 0) {
                     return fragmentShowDetails.TAB_NAME;
                 }
-                return fragmentItemHeld.TAB_NAME;
+                return fragmentStatAndCatch.TAB_NAME;
             }
         });
 
@@ -69,4 +66,5 @@ public class PokemonShowActivity extends AppCompatActivity {
         //viewpager.setAdapter(...);
 
     }
+
 }

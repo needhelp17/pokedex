@@ -4,13 +4,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.example.pokedex.R;
 import com.example.pokedex.activity.showPokemon.PokemonShowActivity;
-import com.example.pokedex.dataRepository.Utils.NetworkAsyncTask;
-import com.example.pokedex.dataRepository.Utils.PokemonCalls;
-import com.example.pokedex.dataRepository.Utils.PokemonsCalls;
+import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonCalls;
+import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonsCalls;
 import com.example.pokedex.dataRepository.entitites.Pokemon;
 
 import java.util.ArrayList;
@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.example.pokedex.activity.homeActivity.recylcer_view.DataGenerator;
 import com.example.pokedex.activity.homeActivity.recylcer_view.MyDataAdapter;
 import com.example.pokedex.activity.homeActivity.recylcer_view.PokemonActionInterface;
+import com.example.pokedex.presenter.Presenter;
 import com.google.android.material.snackbar.Snackbar;
 
 public class HomeActivity extends AppCompatActivity implements PokemonActionInterface, PokemonsCalls.Callbacks, PokemonCalls.CallbacksSimple {
@@ -42,11 +43,13 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
     private List<Pokemon> pokemonList;
     private Boolean recyclerviewLayout = true;
     private TextView textView;
+    private Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.home_activity);
+        presenter = new Presenter();
         pokemonList = new ArrayList<>();
         textView = findViewById(R.id.textView);
         layout = findViewById(R.id.coordinator_layout);
@@ -61,7 +64,15 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_whatshot:
+            case R.id.menu_layout:
+                if(item.getTitle() == "List") {
+                    item.setIcon(getResources().getDrawable(R.drawable.icon_grid));
+                    item.setTitle("Grid");
+                }
+                else {
+                    item.setIcon(getResources().getDrawable(R.drawable.icon_list));
+                    item.setTitle("List");
+                }
                 recyclerViewChangeLayout();
                 return true;
         }
@@ -70,7 +81,11 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
 
     private void recyclerViewChangeLayout() {
         if (recyclerviewLayout){
-            layoutManager = new GridLayoutManager(this.getBaseContext(),2);
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                layoutManager = new GridLayoutManager(this.getBaseContext(), 4);
+            }else {
+                layoutManager = new GridLayoutManager(this.getBaseContext(), 2);
+            }
         }
         else{
             layoutManager = new LinearLayoutManager(this.getBaseContext());

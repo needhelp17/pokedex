@@ -3,14 +3,10 @@ package com.example.pokedex.presenter;
 import com.example.pokedex.R;
 import com.example.pokedex.activity.homeActivity.HomeActivity;
 import com.example.pokedex.dataRepository.Repository;
-import com.example.pokedex.dataRepository.entitites.Pokemon;
-
-import java.util.List;
 
 public class Presenter extends HomeActivity {
 
     private Repository repository;
-    private List<Pokemon> listPokemon;
 
     public Presenter(){
         repository = new Repository();
@@ -55,4 +51,5 @@ public class Presenter extends HomeActivity {
                return R.color.colorNormal;
         }
     }
+
 }
