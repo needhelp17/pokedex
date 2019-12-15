@@ -10,21 +10,13 @@
     android:padding="10dp"
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
-    android:background="@color/colorPrimaryDark">
+    android:background="@drawable/border_image">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@drawable/border_image"
         android:layout_height="90dp">
-
-        <ImageButton
-            android:id="@+id/pokemon_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/gradient_black"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <Space
             android:id="@+id/spacer"
@@ -34,22 +26,63 @@
             app:layout_constraintRight_toLeftOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/version"
             android:layout_width="82dp"
             android:layout_height="22dp"
             android:text="@string/versionEncounter"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="21dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.051"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.235" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/road"
+            android:layout_width="93dp"
+            android:layout_height="20dp"
+            android:text="Road"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.053"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/version" />
+
+        <TextView
+            android:id="@+id/chance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="137dp"
-            tools:layout_editor_absoluteY="36dp" />
+            android:text="chance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.932"
+            app:layout_constraintStart_toEndOf="@+id/version"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.225" />
+
+        <TextView
+            android:id="@+id/method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="method"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chance"
+            app:layout_constraintStart_toEndOf="@+id/version"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="level"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.928"
+            app:layout_constraintStart_toEndOf="@+id/road"
+            app:layout_constraintTop_toBottomOf="@+id/chance"
+            app:layout_constraintVertical_bias="0.555" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

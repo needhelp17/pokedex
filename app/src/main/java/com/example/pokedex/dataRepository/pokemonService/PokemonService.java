@@ -1,7 +1,10 @@
 package com.example.pokedex.dataRepository.pokemonService;
 
+import com.example.pokedex.dataRepository.entitites.Encounter;
 import com.example.pokedex.dataRepository.entitites.Pokemon;
 import com.example.pokedex.dataRepository.entitites.ResultsPokemons;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -25,5 +28,8 @@ public interface PokemonService {
 
     @GET("pokemon/?offset=0&limit=151")
     Call<ResultsPokemons> getPokemonFirstGen();
+
+    @GET("pokemon/{pokemon}/encounters")
+    Call<List<Encounter>> getEncounter(@Path("pokemon") int pokemonId);
 
 }

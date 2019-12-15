@@ -157,4 +157,15 @@
         android:textColor="@color/colorTextButtonNextAndPrevious"
         app:backgroundTint="@color/colorAccent"/>
 
+    <Button
+        android:id="@+id/star"
+        android:layout_width="91dp"
+        android:layout_height="76dp"
+        android:text=""
+        android:background="@drawable/star_default"
+        app:layout_constraintBottom_toBottomOf="@+id/pokemonVersion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pokemonWeigth"
+        app:layout_constraintTop_toTopOf="@+id/pokemonHeigh" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

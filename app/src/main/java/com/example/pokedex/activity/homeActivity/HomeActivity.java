@@ -33,7 +33,7 @@ import com.example.pokedex.activity.homeActivity.recylcer_view.PokemonActionInte
 import com.example.pokedex.presenter.Presenter;
 import com.google.android.material.snackbar.Snackbar;
 
-public class HomeActivity extends AppCompatActivity implements PokemonActionInterface, PokemonsCalls.Callbacks, PokemonCalls.CallbacksSimple {
+public class HomeActivity extends AppCompatActivity implements PokemonActionInterface, PokemonsCalls.Callbacks, PokemonCalls.Callbacks {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;

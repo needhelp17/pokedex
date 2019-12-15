@@ -5,16 +5,21 @@ import java.util.List;
 public class Method {
     public String name ;
     public String url ;
-}
 
-    public class EncounterDetail
-    {
-        public int chance ;
-        public List<ConditionValue> condition_values ;
-        public int max_level ;
-        public Method method ;
-        public int min_level ;
+    public String getName() {
+        return name;
     }
-    
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
 

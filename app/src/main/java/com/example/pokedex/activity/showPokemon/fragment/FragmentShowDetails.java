@@ -21,7 +21,7 @@ import com.example.pokedex.dataRepository.entitites.GameIndex;
 import com.example.pokedex.dataRepository.entitites.Pokemon;
 import com.example.pokedex.presenter.Presenter;
 
-public class FragmentShowDetails extends Fragment implements PokemonCalls.CallbacksSimple {
+public class FragmentShowDetails extends Fragment implements PokemonCalls.Callbacks {
 
     public static final String TAB_NAME = "Détail";
     private Presenter presenter;

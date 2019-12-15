@@ -86,7 +86,6 @@ public class MyDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Collections.sort(newdataset);
         pokemonViewModelList = newdataset;
         notifyDataSetChanged();
-
     }
 
     public List<PokemonViewModel> getPokemonViewModelList() {
