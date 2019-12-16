@@ -1,6 +1,6 @@
 package com.example.pokedex.activity.homeActivity.recylcer_view;
 
-import com.example.pokedex.dataRepository.entitites.Pokemon;
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
 
 import java.util.ArrayList;
 import java.util.List;

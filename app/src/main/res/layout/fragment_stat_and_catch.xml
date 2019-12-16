@@ -7,14 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".activity.showPokemon.fragment.FragmentStatAndCatch">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/statBar"
         android:layout_width="match_parent"
-        android:layout_height="269dp"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/stat_table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"></include>
 
         <TextView
             android:id="@+id/textView3"
@@ -24,18 +31,24 @@
             android:text="@string/statsText"
             android:textColor="@color/colorAccent"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/include"
-            layout="@layout/stat_table"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></include>
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageArrow"
+            android:layout_width="62dp"
+            android:layout_height="45dp"
+            android:background="@drawable/arrow_down"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textViewEncounter"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/encountersText"
@@ -43,26 +56,17 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/statBar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewEncounter"
-        android:layout_width="412dp"
-        android:layout_height="435dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="380dp"
+        android:layout_height="241dp"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewEncounter" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="wesh"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewEncounter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEncounter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package com.example.pokedex.dataRepository.encounterAreaService;
 
-import com.example.pokedex.dataRepository.entitites.Pokemon;
-import com.example.pokedex.dataRepository.entitites.ResultsPokemons;
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;

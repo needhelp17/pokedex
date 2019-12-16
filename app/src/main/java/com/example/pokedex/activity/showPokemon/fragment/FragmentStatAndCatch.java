@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -15,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pokedex.R;
 import com.example.pokedex.activity.showPokemon.fragment.recyclerViewEncounter.AdapterEncounter;
-import com.example.pokedex.dataRepository.entitites.Encounter;
+import com.example.pokedex.dataRepository.entitites.encounter.Encounter;
 import com.example.pokedex.dataRepository.pokemonService.EncounterCalls.EncounterCall;
 import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonCalls;
-import com.example.pokedex.dataRepository.entitites.Pokemon;
-import com.example.pokedex.dataRepository.entitites.Stat;
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
+import com.example.pokedex.dataRepository.entitites.pokemon.Stat;
 
 import java.util.List;
 
@@ -34,7 +33,9 @@ public class FragmentStatAndCatch extends Fragment implements PokemonCalls.Callb
     private TextView attackspe;
     private TextView defensespe;
     private RecyclerView recyclerViewEncounter;
+
     private Pokemon p;
+    private View include;
 
     public FragmentStatAndCatch(int id) {
         EncounterCall.fetchEncounter(this,id);
@@ -57,6 +58,7 @@ public class FragmentStatAndCatch extends Fragment implements PokemonCalls.Callb
         defensespe = rootView.findViewById(R.id.statSpeAttackValue);
         attackspe = rootView.findViewById(R.id.statSpeDefenseValue);
         recyclerViewEncounter = rootView.findViewById(R.id.recyclerViewEncounter);
+        include = rootView.findViewById(R.id.include);
         return rootView;
 
     }
@@ -110,11 +112,24 @@ public class FragmentStatAndCatch extends Fragment implements PokemonCalls.Callb
 
     @Override
     public void onResponse(@Nullable List<Encounter> encounters) {
-        System.out.println("t'es ici frere");
         AdapterEncounter adapterEncounter = new AdapterEncounter(encounters);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerViewEncounter.setAdapter(adapterEncounter);
         recyclerViewEncounter.setLayoutManager(layoutManager);
+        rootView.findViewById(R.id.statBar).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(include.getVisibility()==View.VISIBLE){
+                    include.setVisibility(View.INVISIBLE);
+                    rootView.findViewById(R.id.imageArrow).setBackgroundResource(R.drawable.arrow_down);
+                    rootView.findViewById(R.id.textViewEncounter).setTop(rootView.findViewById(R.id.statBar).getBottom());
+                }
+                else{
+                    include.setVisibility(View.VISIBLE);
+                    rootView.findViewById(R.id.imageArrow).setBackgroundResource(R.drawable.arrow_up);
+
+                }
+            }
+        });
         /*TextView tv = getActivity().findViewById(R.id.textView5);
         if (encounters.size()!=0){
             String text = String.valueOf(encounters.size())+"  example : "+encounters.get(0).location_area.name;

@@ -1,16 +1,39 @@
 package com.example.pokedex.presenter;
 
+import android.app.Application;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.room.DatabaseConfiguration;
+import androidx.room.InvalidationTracker;
+import androidx.sqlite.db.SupportSQLiteOpenHelper;
+
 import com.example.pokedex.R;
 import com.example.pokedex.activity.homeActivity.HomeActivity;
-import com.example.pokedex.dataRepository.Repository;
+import com.example.pokedex.dataRepository.PokemonRepository;
+import com.example.pokedex.dataRepository.db.PokemonDAO;
+import com.example.pokedex.dataRepository.db.PokemonDatabase;
+import com.example.pokedex.dataRepository.entitites.db.PokemonEntity;
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
+import com.example.pokedex.presenter.favorites.FavoritesDataSource;
+
+import java.util.Collection;
+import java.util.List;
 
 public class Presenter extends HomeActivity {
 
-    private Repository repository;
+    private PokemonRepository repository;
+    private FavoritesDataSource favoriService;
+    private Context context;
 
-    public Presenter(){
-        repository = new Repository();
+    public Presenter(Application application){
+        repository = new PokemonRepository(application);
     }
+
+    public Presenter(Context applicationContext) {
+        repository = new PokemonRepository(applicationContext);
+    }
+
     public int getColorType(String type){
         switch (type) {
             case "grass":
@@ -52,4 +75,12 @@ public class Presenter extends HomeActivity {
         }
     }
 
+    public void addfavori(int id){
+        PokemonEntity pe = new PokemonEntity(id, "coucou", "url");
+        repository.insert(pe);
+    }
+
+    public List<Integer> getFavoris() {
+        return repository.getAllfavoritesPokemons().getValue();
+    }
 }

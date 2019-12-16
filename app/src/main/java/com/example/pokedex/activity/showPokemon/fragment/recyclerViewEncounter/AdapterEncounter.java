@@ -9,9 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pokedex.R;
-import com.example.pokedex.dataRepository.entitites.Encounter;
-import com.example.pokedex.dataRepository.entitites.VersionDetail;
-import com.example.pokedex.dataRepository.entitites.VersionDetailEncounter;
+import com.example.pokedex.dataRepository.entitites.encounter.Encounter;
+import com.example.pokedex.dataRepository.entitites.encounter.VersionDetail;
 
 import java.util.List;
 
@@ -65,15 +64,16 @@ public class AdapterEncounter extends RecyclerView.Adapter<RecyclerView.ViewHold
             road.setText("road : "+encounter.getLocation_area().name.replace("-"," "));
             String versions="";
             int max_chance=0;
-            int min_level = 0;
-            int max_level = 101;
+            int min_level = 101;
+            int max_level = 0;
             String method_capture = "";
-            for (VersionDetailEncounter ve : encounter.getVersion_details()){
+            for (VersionDetail ve : encounter.getVersion_details()){
                 if (ve != null) {
                     versions.concat(ve.getVersion().getName() + "/");
                     if (max_chance < ve.getMax_chance()) {
                         max_chance = ve.getMax_chance();
                     }
+                    System.out.println(ve.getEncounterDetail());
                     if (ve.getEncounterDetail()!= null) {
                         if (min_level > ve.getEncounterDetail().getMin_level()) {
                             min_level = ve.getEncounterDetail().getMin_level();

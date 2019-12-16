@@ -3,7 +3,7 @@ package com.example.pokedex.dataRepository.pokemonService.EncounterCalls;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.pokedex.dataRepository.entitites.Encounter;
+import com.example.pokedex.dataRepository.entitites.encounter.Encounter;
 import com.example.pokedex.dataRepository.pokemonService.PokemonService;
 
 import java.lang.ref.WeakReference;

@@ -5,7 +5,7 @@ import android.app.Activity;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.pokedex.dataRepository.entitites.Pokemon;
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
 import com.example.pokedex.dataRepository.pokemonService.PokemonService;
 
 import java.lang.ref.WeakReference;

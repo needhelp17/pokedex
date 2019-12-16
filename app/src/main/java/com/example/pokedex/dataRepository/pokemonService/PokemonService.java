@@ -1,8 +1,8 @@
 package com.example.pokedex.dataRepository.pokemonService;
 
-import com.example.pokedex.dataRepository.entitites.Encounter;
-import com.example.pokedex.dataRepository.entitites.Pokemon;
-import com.example.pokedex.dataRepository.entitites.ResultsPokemons;
+import com.example.pokedex.dataRepository.entitites.encounter.Encounter;
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
+import com.example.pokedex.dataRepository.entitites.pokemon.ResultsPokemons;
 
 import java.util.List;
 

@@ -2,8 +2,8 @@ package com.example.pokedex.dataRepository.pokemonService.pokemonCalls;
 
 import androidx.annotation.Nullable;
 
-import com.example.pokedex.dataRepository.entitites.Pokemon;
-import com.example.pokedex.dataRepository.entitites.ResultsPokemons;
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
+import com.example.pokedex.dataRepository.entitites.pokemon.ResultsPokemons;
 import com.example.pokedex.dataRepository.pokemonService.PokemonService;
 
 import java.lang.ref.WeakReference;

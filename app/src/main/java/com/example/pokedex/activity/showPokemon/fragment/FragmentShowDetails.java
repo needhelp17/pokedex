@@ -1,6 +1,7 @@
 package com.example.pokedex.activity.showPokemon.fragment;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +18,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.pokedex.R;
 import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonCalls;
-import com.example.pokedex.dataRepository.entitites.GameIndex;
-import com.example.pokedex.dataRepository.entitites.Pokemon;
+import com.example.pokedex.dataRepository.entitites.pokemon.GameIndex;
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
 import com.example.pokedex.presenter.Presenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentShowDetails extends Fragment implements PokemonCalls.Callbacks {
 
     public static final String TAB_NAME = "Détail";
+    private int id;
     private Presenter presenter;
     private View rootView;
     private boolean front = true;
@@ -39,10 +44,13 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
     private Switch shinySwitch;
     private Button buttonPrevious;
     private Button buttonNext;
+    private Button starbutton;
+
 
 
     public FragmentShowDetails(int id) {
         if (id != 0) {
+            id = id;
             PokemonCalls.fetchPokemonById(this, id);
         }
     }
@@ -54,7 +62,7 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        presenter = new Presenter();
+        presenter = new Presenter(this.getContext().getApplicationContext());
         rootView = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_preview, null);
         nameText = rootView.findViewById(R.id.pokemonName);
         idText = rootView.findViewById(R.id.pokemonId);
@@ -67,6 +75,12 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
         shinySwitch = rootView.findViewById(R.id.pokemonShiny);
         buttonPrevious = rootView.findViewById(R.id.buttonprevious);
         buttonNext = rootView.findViewById(R.id.buttonnext);
+        starbutton = rootView.findViewById(R.id.star);
+        List<Integer> idpoke = new ArrayList<>();
+        idpoke = presenter.getFavoris();
+        if (idpoke!= null && idpoke.contains(id)){
+            starbutton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        }
         return rootView;
 
     }
@@ -93,6 +107,17 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
                 changeImg(img, true);
             }
         });
+        /*starbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(starbutton.getBackground()==getResources().getDrawable(R.drawable.star_default)) {
+                    presenter.addFavoris(id,p.getName(),p.getSprites().getFrontDefault());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        starbutton.setBackground(getResources().getDrawable(R.drawable.star_fav));
+                    }
+                }
+            }
+        });*/
     }
 
     public void changeImg(View v, Boolean is_shiny) {

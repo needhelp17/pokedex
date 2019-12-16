@@ -11,7 +11,7 @@ import com.example.pokedex.R;
 import com.example.pokedex.activity.showPokemon.PokemonShowActivity;
 import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonCalls;
 import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonsCalls;
-import com.example.pokedex.dataRepository.entitites.Pokemon;
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,8 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
-        presenter = new Presenter();
+        presenter = new Presenter(this);
+        presenter.addfavori(12);
         pokemonList = new ArrayList<>();
         textView = findViewById(R.id.textView);
         layout = findViewById(R.id.coordinator_layout);
