@@ -55,17 +55,19 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
     private boolean is_fav=false;
     private TextView favoriteText;
     private FragmentStatAndCatch fragmentStatAndCatch;
+    private boolean is_on_fav;
 
 
-    public FragmentShowDetails(int id) {
+    public FragmentShowDetails(int id,boolean is_on_fav) {
         if (id != 0) {
             id = id;
+            is_on_fav = is_on_fav;
             PokemonCalls.fetchPokemonById(this, id);
         }
     }
 
-    public static FragmentShowDetails newInstance(int id) {
-        return new FragmentShowDetails(id);
+    public static FragmentShowDetails newInstance(int id,boolean is_on_fav) {
+        return new FragmentShowDetails(id,is_on_fav);
     }
 
     @Override
@@ -209,10 +211,16 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
                     if (pokefavlist.contains(p.getId())){
                         is_fav =true;
                         favoriteText.setText("Remove of Favorite");
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        starbutton.setBackground(getResources().getDrawable(R.drawable.favorite_fill));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            starbutton.setBackground(getResources().getDrawable(R.drawable.favorite_fill));
+                        }
+                    }else{
+                        is_fav =false;
+                        favoriteText.setText("Add of Favorite");
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            starbutton.setBackground(getResources().getDrawable(R.drawable.favorite_default));
+                        }
                     }
-                }
                 }
             });
             starbutton.setOnClickListener(new View.OnClickListener() {
@@ -245,12 +253,35 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
     }
 
     public int getPrevious(int id) {
-        return id == 1 ? 151 : id - 1;
+        if(!is_on_fav) {
+            return id == 1 ? 151 : id - 1;
+        }else{
+            if(pokefavlist.size()!=0){
+                for (int i = 0; i< pokefavlist.size();i++){
+                    if(pokefavlist.get(i)==p.getId()){
+                        return pokefavlist.get(i==0?pokefavlist.size()-1:i-1);
+                    }
+                }
+            }
+            return id;
+        }
     }
 
 
     public int getNext(int id) {
-        return id == 151 ? 1 : id + 1;
+        if(!is_on_fav) {
+            return id == 151 ? 1 : id + 1;
+        }else{
+            if(pokefavlist.size()!=0){
+                for (int i = 0; i< pokefavlist.size();i++){
+                    if(pokefavlist.get(i)==p.getId()){
+                        return pokefavlist.get(i==pokefavlist.size()-1?0:i+1);
+                    }
+                }
+            }
+            return id;
+        }
+
     }
 
 

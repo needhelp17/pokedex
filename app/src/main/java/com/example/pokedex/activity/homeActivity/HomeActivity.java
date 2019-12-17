@@ -46,9 +46,10 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
     private Button button;
     private ConstraintLayout layout;
     private List<Pokemon> pokemonList;
-    private List<PokemonEntity> list_fav;
+    private List<Pokemon> list_fav;
     private Boolean recyclerviewLayout = true;
     private TextView textView;
+    private boolean is_on_fav = false;
     //private Presenter presenter;
 
     @Override
@@ -82,8 +83,8 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
                 }
                 recyclerViewChangeLayout();
                 return true;
-            /*case R.id.menu_favorite:
-                if(item.getTitle().toString().equals("All")){
+            case R.id.menu_favorite:
+                if(is_on_fav){
                     item.setIcon(getResources().getDrawable(R.drawable.favorite_default_white));
                     item.setTitle("Fav");
                 }
@@ -91,34 +92,36 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
                     item.setIcon(getResources().getDrawable(R.drawable.favorite_fill_white));
                     item.setTitle("All");
                 }
+                is_on_fav = !is_on_fav;
                 changeData(item.getTitle().toString());
-*/
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-    /*private void changeData(String type){
+    private void changeData(String type){
         if (type.equals("All")){
             PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
-            pokemonViewModel.getfavoris().observe(this, new Observer<List<PokemonEntity>>() {
+            pokemonViewModel.getfavoris().observe(this, new Observer<List<Integer>>() {
                 @Override
-                public void onChanged(List<PokemonEntity> list) {
-                    System.out.println(list.size()+" rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-                    list_fav = list;
-                    List<com.example.pokedex.activity.homeActivity.recylcer_view.PokemonViewModel> list2 = DataGenerator.generateData2(list);
-                    myDataAdapter.onBind(DataGenerator.generateData2(list));
-                    recyclerView.setAdapter(myDataAdapter);
+                public void onChanged(List<Integer> list) {
+                    list_fav.clear();
+                    for(Pokemon p : pokemonList){
+                        if (list.contains(p.getId())){
+                            list_fav.add(p);
+                        }
+                    }
+                    myDataAdapter.onBind(DataGenerator.generateData(list_fav));
+                    //recyclerView.setAdapter(myDataAdapter);
                 }
             });
-            System.out.println(list_fav.size()+" rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
         }
         else{
             myDataAdapter.onBind(DataGenerator.generateData(pokemonList));
-            recyclerView.setAdapter(myDataAdapter);
+           // recyclerView.setAdapter(myDataAdapter);
         }
     }
-*/
+
     private void recyclerViewChangeLayout() {
         if (recyclerviewLayout){
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -159,11 +162,11 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
 
     @Override
     public void onPokemonClicked(String pokemonName,String id_string) {
-        displaySnackBar(pokemonName);
         int id = Integer.valueOf(id_string);
         Intent showPoke = new Intent(this, PokemonShowActivity.class);
         showPoke.putExtra("id",id);
         showPoke.putExtra("name",pokemonName);
+        showPoke.putExtra("is_fav",is_on_fav);
         startActivity(showPoke);
         //myDataAdapter.notifyDataSetChanged();
     }
@@ -226,4 +229,15 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
         this.textView.setVisibility(View.INVISIBLE);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+    }
+    @Override
+    public void onRestart() {
+        displaySnackBar("list : "+myDataAdapter.getItemCount());
+        System.out.println(is_on_fav);
+        changeData(is_on_fav?"All":"Fav");
+        super.onRestart();
+    }
 }

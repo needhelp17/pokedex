@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class PokemonShowActivity extends AppCompatActivity {
     private int id;
     private ViewPager viewPager;
+    private boolean is_on_fav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class PokemonShowActivity extends AppCompatActivity {
         setContentView(R.layout.show_detail_activity);
         Intent i = getIntent();
         id = i.getIntExtra("id",0);
+        is_on_fav = i.getBooleanExtra("is_fav",false);
         setupViewPagerAndTabs();
 
     }
@@ -34,7 +36,7 @@ public class PokemonShowActivity extends AppCompatActivity {
     }
 
     private void setupViewPagerAndTabs() {
-        final FragmentShowDetails fragmentShowDetails = new FragmentShowDetails(id);
+        final FragmentShowDetails fragmentShowDetails = new FragmentShowDetails(id,is_on_fav);
         final FragmentStatAndCatch fragmentStatAndCatch = new FragmentStatAndCatch(id);
         viewPager = findViewById(R.id.tab_viewpager);
 

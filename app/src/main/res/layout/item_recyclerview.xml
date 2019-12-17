@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/icon_imageview"
-            android:layout_width="94dp"
-            android:layout_height="67dp"
+            android:layout_width="96dp"
+            android:layout_height="88dp"
             android:layout_marginLeft="68dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
