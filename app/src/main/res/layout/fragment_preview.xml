@@ -159,13 +159,23 @@
 
     <Button
         android:id="@+id/star"
-        android:layout_width="91dp"
-        android:layout_height="76dp"
+        android:layout_width="62dp"
+        android:layout_height="58dp"
+        android:background="@drawable/favorite_default"
         android:text=""
-        android:background="@drawable/star_default"
-        app:layout_constraintBottom_toBottomOf="@+id/pokemonVersion"
+        app:layout_constraintEnd_toEndOf="@+id/favoriteText"
+        app:layout_constraintStart_toStartOf="@+id/favoriteText"
+        app:layout_constraintTop_toBottomOf="@+id/favoriteText" />
+
+    <TextView
+        android:id="@+id/favoriteText"
+        android:layout_width="123dp"
+        android:layout_height="21dp"
+        android:textAlignment="center"
+        android:text="Add to Favorite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pokemonWeigth"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toEndOf="@+id/pokemonHeigh"
         app:layout_constraintTop_toTopOf="@+id/pokemonHeigh" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

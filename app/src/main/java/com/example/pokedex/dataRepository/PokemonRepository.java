@@ -22,16 +22,13 @@ public class PokemonRepository {
         pokemonDAO = db.pokemonDAO();
     }
 
-    public PokemonRepository(Context applicationContext) {
-        PokemonDatabase db = PokemonDatabase.getDatabase(applicationContext);
-        pokemonDAO = db.pokemonDAO();
-    }
 
     public LiveData<List<Integer>> getAllfavoritesPokemons() {
         return pokemonDAO.getFavoriteIdList();
     }
 
-    public void insert (PokemonEntity pokemonEntity) {
+
+    public void insert(PokemonEntity pokemonEntity) {
         new PokemonRepository.insertAsyncTask(pokemonDAO).execute(pokemonEntity);
     }
 
@@ -45,17 +42,16 @@ public class PokemonRepository {
 
         @Override
         protected Void doInBackground(final PokemonEntity... params) {
+            System.out.println("insert :  id : "+params[0].getId()+" name : "+params[0].getName()+" img : "+params[0].getImg());
             mAsyncTaskDao.addPokemonToFavorites(params[0]);
             return null;
         }
     }
 
-    public void deleteAll()  {
+
+    public void deleteAll() {
         new PokemonRepository.deleteAllAsyncTask(pokemonDAO).execute();
     }
-
-
-
 
 
     private static class deleteAllAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -72,12 +68,10 @@ public class PokemonRepository {
         }
     }
 
-    public void deletePokemon(PokemonEntity pokemonEntity)  {
-        new PokemonRepository.deletePokemonAsyncTask(pokemonDAO).execute((Runnable) pokemonEntity);
+
+    public void deletePokemon(PokemonEntity pokemonEntity) {
+        new PokemonRepository.deletePokemonAsyncTask(pokemonDAO).execute(pokemonEntity);
     }
-
-
-
 
     private static class deletePokemonAsyncTask extends AsyncTask<PokemonEntity, Void, Void> {
         private PokemonDAO mAsyncTaskDao;
@@ -88,31 +82,11 @@ public class PokemonRepository {
 
         @Override
         protected Void doInBackground(final PokemonEntity... params) {
-            mAsyncTaskDao.deletePokemonFromFavorites(String.valueOf(params[0].getId()));
+            mAsyncTaskDao.deletePokemonFromFavorites(params[0]);
+            System.out.println("delete : "+params[0].getId());
             return null;
         }
     }
-
-    public void deleteAllPokemons(Integer id_trip)  {
-        new PokemonRepository.deleteAllPokemonsAsyncTask(pokemonDAO).execute(id_trip);
-    }
-
-
-
-
-    private static class deleteAllPokemonsAsyncTask extends AsyncTask<Integer, Void, Void> {
-        private PokemonDAO mAsyncTaskDao;
-
-        deleteAllPokemonsAsyncTask(PokemonDAO dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(final Integer... params) {
-            mAsyncTaskDao.deletePokemonFromFavorites(String.valueOf(params[0]));
-            return null;
-        }
-    }
-
 
 }
+

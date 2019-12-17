@@ -2,6 +2,7 @@ package com.example.pokedex.dataRepository.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -21,10 +22,10 @@ public interface PokemonDAO {
     LiveData<List<PokemonEntity>> loadFavorites();
 
     @Insert
-    public Completable addPokemonToFavorites(PokemonEntity pokemon);
+    public void addPokemonToFavorites(PokemonEntity pokemon);
 
-    @Query("DELETE FROM pokemonentity WHERE id = :id")
-    public Completable deletePokemonFromFavorites(String id);
+    @Delete
+    public void deletePokemonFromFavorites(PokemonEntity pokemon);
 
     @Query("DELETE FROM pokemonentity")
     public Completable deleteAllFavorites();

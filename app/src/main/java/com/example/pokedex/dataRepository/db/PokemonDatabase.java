@@ -13,7 +13,7 @@ import com.example.pokedex.dataRepository.entitites.db.PokemonEntity;
 
 import io.reactivex.annotations.NonNull;
 
-@Database(entities = {PokemonEntity.class}, version = 1)
+@Database(entities = {PokemonEntity.class}, version = 2)
 public abstract class PokemonDatabase extends RoomDatabase {
     public abstract PokemonDAO pokemonDAO();
 
@@ -24,7 +24,7 @@ public abstract class PokemonDatabase extends RoomDatabase {
             synchronized (PokemonDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            PokemonDatabase.class, "notes_photos_videos_database")
+                            PokemonDatabase.class, "pokemon_database")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }

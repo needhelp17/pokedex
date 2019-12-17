@@ -1,5 +1,6 @@
 package com.example.pokedex.activity.homeActivity.recylcer_view;
 
+import com.example.pokedex.dataRepository.entitites.db.PokemonEntity;
 import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
 
 import java.util.UUID;
@@ -18,6 +19,12 @@ public class PokemonViewModel implements Comparable{
         this.uuid = UUID.randomUUID().toString();
     }
 
+   /* public PokemonViewModel(PokemonEntity p){
+        this.name = p.getName();
+        this.id = p.getId()+1;
+        this.imageUrl = p.getImg();
+        this.uuid = UUID.randomUUID().toString();
+    }*/
 
     public int getId() {
         return id;

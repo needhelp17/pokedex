@@ -26,13 +26,13 @@ public class Presenter extends HomeActivity {
     private FavoritesDataSource favoriService;
     private Context context;
 
-    public Presenter(Application application){
-        repository = new PokemonRepository(application);
+    public Presenter(/*Application application*/){
+        //repository = new PokemonRepository(application);
     }
 
-    public Presenter(Context applicationContext) {
+    /*public Presenter(Context applicationContext) {
         repository = new PokemonRepository(applicationContext);
-    }
+    }*/
 
     public int getColorType(String type){
         switch (type) {
@@ -73,14 +73,5 @@ public class Presenter extends HomeActivity {
            default:
                return R.color.colorNormal;
         }
-    }
-
-    public void addfavori(int id){
-        PokemonEntity pe = new PokemonEntity(id, "coucou", "url");
-        repository.insert(pe);
-    }
-
-    public List<Integer> getFavoris() {
-        return repository.getAllfavoritesPokemons().getValue();
     }
 }

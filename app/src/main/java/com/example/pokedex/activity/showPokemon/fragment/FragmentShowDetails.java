@@ -13,10 +13,15 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.pokedex.R;
+import com.example.pokedex.dataRepository.db.PokemonViewModel;
 import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonCalls;
 import com.example.pokedex.dataRepository.entitites.pokemon.GameIndex;
 import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
@@ -45,7 +50,11 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
     private Button buttonPrevious;
     private Button buttonNext;
     private Button starbutton;
-
+    private PokemonViewModel pokemonViewModel;
+    private List<Integer> pokefavlist;
+    private boolean is_fav=false;
+    private TextView favoriteText;
+    private FragmentStatAndCatch fragmentStatAndCatch;
 
 
     public FragmentShowDetails(int id) {
@@ -62,7 +71,13 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        presenter = new Presenter(this.getContext().getApplicationContext());
+        presenter = new Presenter();
+        for (Fragment f : getFragmentManager().getFragments()){
+            if (f instanceof  FragmentStatAndCatch)
+                fragmentStatAndCatch = (FragmentStatAndCatch)f;
+        }
+
+        pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
         rootView = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_preview, null);
         nameText = rootView.findViewById(R.id.pokemonName);
         idText = rootView.findViewById(R.id.pokemonId);
@@ -76,11 +91,8 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
         buttonPrevious = rootView.findViewById(R.id.buttonprevious);
         buttonNext = rootView.findViewById(R.id.buttonnext);
         starbutton = rootView.findViewById(R.id.star);
-        List<Integer> idpoke = new ArrayList<>();
-        idpoke = presenter.getFavoris();
-        if (idpoke!= null && idpoke.contains(id)){
-            starbutton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        }
+        pokefavlist = new ArrayList<>();
+        favoriteText = rootView.findViewById(R.id.favoriteText);
         return rootView;
 
     }
@@ -107,17 +119,6 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
                 changeImg(img, true);
             }
         });
-        /*starbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(starbutton.getBackground()==getResources().getDrawable(R.drawable.star_default)) {
-                    presenter.addFavoris(id,p.getName(),p.getSprites().getFrontDefault());
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        starbutton.setBackground(getResources().getDrawable(R.drawable.star_fav));
-                    }
-                }
-            }
-        });*/
     }
 
     public void changeImg(View v, Boolean is_shiny) {
@@ -152,10 +153,10 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
 
     @Override
     public void onResponse(@Nullable Pokemon pokemon) {
-        System.out.println("ici" + pokemon.getName());
         if (pokemon != null) {
             p = pokemon;
-            nameText.setText(p.getName());
+            String name = p.getName().substring(0,1).toUpperCase().concat(p.getName().substring(1));
+            nameText.setText(name);
             idText.setText("No. " + String.valueOf(p.getId()));
             String heigh = String.valueOf(p.getHeight());
             heigh = heigh.substring(0, heigh.length() - 1) + "," + heigh.substring(heigh.length() - 1);
@@ -189,29 +190,53 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
             buttonNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    fragmentStatAndCatch.reload(getNext(p.getId()));
                     PokemonCalls.fetchPokemonById(thisfragment, getNext(p.getId()));
-                    for (Fragment f :getActivity().getSupportFragmentManager().getFragments()){
-                        if(f.getClass() != thisfragment.getClass()){
-                            if (f instanceof FragmentStatAndCatch){
-                                ((FragmentStatAndCatch) f).reload(p.getId());
-                            }
-                        }
-                    }
                 }
             });
             buttonPrevious.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    fragmentStatAndCatch.reload(getPrevious(p.getId()));
                     PokemonCalls.fetchPokemonById(thisfragment, getPrevious(p.getId()));
-                    for (Fragment f :getActivity().getSupportFragmentManager().getFragments()){
-                        if(f.getClass() != thisfragment.getClass()){
-                            if (f instanceof FragmentStatAndCatch){
-                                ((FragmentStatAndCatch) f).reload(p.getId());
-                            }
+
+                }
+            });
+            pokemonViewModel.getfavoris().observe(this, new Observer<List<Integer>>() {
+                @Override
+                public void onChanged(List<Integer> list) {
+                    pokefavlist = list;
+                    if (pokefavlist.contains(p.getId())){
+                        is_fav =true;
+                        favoriteText.setText("Remove of Favorite");
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        starbutton.setBackground(getResources().getDrawable(R.drawable.favorite_fill));
+                    }
+                }
+                }
+            });
+            starbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(is_fav) {
+                        favoriteText.setText("Add to Favorite");
+                        is_fav=false;
+                        pokemonViewModel.deletePokemon(p);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            starbutton.setBackground(getResources().getDrawable(R.drawable.favorite_default));
+                        }
+                    }
+                    else {
+                        is_fav=true;
+                        favoriteText.setText("Remove of Favorite");
+                        pokemonViewModel.insert(p);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            starbutton.setBackground(getResources().getDrawable(R.drawable.favorite_fill));
                         }
                     }
                 }
             });
+
         }
     }
 
@@ -227,5 +252,6 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
     public int getNext(int id) {
         return id == 151 ? 1 : id + 1;
     }
+
 
 }

@@ -23,12 +23,12 @@ public class FavoritesDataSource {
         return pokemonDatabase.pokemonDAO().loadFavorites();
     }
 
-    public Completable addPokemonToFavorites(PokemonEntity pokemonEntity) {
-        return pokemonDatabase.pokemonDAO().addPokemonToFavorites(pokemonEntity);
+    public void addPokemonToFavorites(PokemonEntity pokemonEntity) {
+        pokemonDatabase.pokemonDAO().addPokemonToFavorites(pokemonEntity);
     }
 
-    public Completable deletePokemonFromFavorites(String id) {
-        return pokemonDatabase.pokemonDAO().deletePokemonFromFavorites(id);
+    public void deletePokemonFromFavorites(PokemonEntity pokemonEntity) {
+        pokemonDatabase.pokemonDAO().deletePokemonFromFavorites(pokemonEntity);
     }
 
     public LiveData<List<Integer>> getFavoriteIdList() {

@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pokedex.R;
 import com.example.pokedex.dataRepository.entitites.encounter.Encounter;
+import com.example.pokedex.dataRepository.entitites.encounter.EncounterDetail;
 import com.example.pokedex.dataRepository.entitites.encounter.VersionDetail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterEncounter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -62,35 +64,55 @@ public class AdapterEncounter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public void update(Encounter encounter){
             road.setText("road : "+encounter.getLocation_area().name.replace("-"," "));
-            String versions="";
+            List<String> versions = new ArrayList<>();
             int max_chance=0;
             int min_level = 101;
             int max_level = 0;
-            String method_capture = "";
+            List<String> method_capture = new ArrayList<>();
             for (VersionDetail ve : encounter.getVersion_details()){
-                if (ve != null) {
-                    versions.concat(ve.getVersion().getName() + "/");
-                    if (max_chance < ve.getMax_chance()) {
-                        max_chance = ve.getMax_chance();
-                    }
-                    System.out.println(ve.getEncounterDetail());
+                versions.add(ve.getVersion().getName());
+                if (max_chance < ve.getMax_chance()) {
+                    max_chance = ve.getMax_chance();
+                }
+                EncounterDetail ed = ve.getEncounterDetail().get(0);
                     if (ve.getEncounterDetail()!= null) {
-                        if (min_level > ve.getEncounterDetail().getMin_level()) {
-                            min_level = ve.getEncounterDetail().getMin_level();
+                        if (min_level > ed.getMin_level()) {
+                            min_level = ed.getMin_level();
                         }
-                        if (max_level < ve.getEncounterDetail().getMax_level()) {
-                            max_level = ve.getEncounterDetail().getMax_level();
+                        if (max_level < ed.getMax_level()) {
+                            max_level = ed.getMax_level();
                         }
-                        if (!method_capture.contains(ve.getEncounterDetail().getMethod().getName())) {
-                            method_capture.concat(ve.getEncounterDetail().getMethod().getName() + "/");
+                        if (!method_capture.contains(ed.getMethod().getName())) {
+                            method_capture.add(ed.getMethod().getName());
                         }
                     }
                 }
+            if (versions.size()==0){
+                version.setText("");
             }
-            version.setText(versions==""?"":versions.substring(0,versions.length()-1));
+            else{
+                String res="";
+                for (String s: versions){
+                    res+=s+" / ";
+                }
+                version.setText(res.substring(0,res.length()-2));
+            }
             chance.setText("chance : "+max_chance+"%");
-            level.setText("level "+min_level+" to "+max_level);
-            method.setText(method_capture==""? "": method_capture.substring(0,method_capture.length()-1));
+            if (min_level==max_level)
+                level.setText("level : "+min_level);
+            else
+                level.setText("level "+min_level+" to "+max_level);
+
+            if (method_capture.size()==0){
+                method.setText("");
+            }
+            else{
+                String res="";
+                for (String s: method_capture){
+                    res+=s+" / ";
+                }
+                method.setText(res.substring(0,res.length()-2));
+            }
         }
     }
 }

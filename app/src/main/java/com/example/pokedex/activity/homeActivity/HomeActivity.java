@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.pokedex.R;
 import com.example.pokedex.activity.showPokemon.PokemonShowActivity;
+import com.example.pokedex.dataRepository.db.PokemonViewModel;
+import com.example.pokedex.dataRepository.entitites.db.PokemonEntity;
 import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonCalls;
 import com.example.pokedex.dataRepository.pokemonService.pokemonCalls.PokemonsCalls;
 import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
@@ -17,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,17 +46,18 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
     private Button button;
     private ConstraintLayout layout;
     private List<Pokemon> pokemonList;
+    private List<PokemonEntity> list_fav;
     private Boolean recyclerviewLayout = true;
     private TextView textView;
-    private Presenter presenter;
+    //private Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
-        presenter = new Presenter(this);
-        presenter.addfavori(12);
+        //presenter = new Presenter(/*this*/);
         pokemonList = new ArrayList<>();
+        list_fav = new ArrayList<>();
         textView = findViewById(R.id.textView);
         layout = findViewById(R.id.coordinator_layout);
         executeHttpRequestWithRetrofit();
@@ -76,10 +82,43 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
                 }
                 recyclerViewChangeLayout();
                 return true;
+            /*case R.id.menu_favorite:
+                if(item.getTitle().toString().equals("All")){
+                    item.setIcon(getResources().getDrawable(R.drawable.favorite_default_white));
+                    item.setTitle("Fav");
+                }
+                else{
+                    item.setIcon(getResources().getDrawable(R.drawable.favorite_fill_white));
+                    item.setTitle("All");
+                }
+                changeData(item.getTitle().toString());
+*/
         }
         return super.onOptionsItemSelected(item);
     }
 
+
+    /*private void changeData(String type){
+        if (type.equals("All")){
+            PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
+            pokemonViewModel.getfavoris().observe(this, new Observer<List<PokemonEntity>>() {
+                @Override
+                public void onChanged(List<PokemonEntity> list) {
+                    System.out.println(list.size()+" rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+                    list_fav = list;
+                    List<com.example.pokedex.activity.homeActivity.recylcer_view.PokemonViewModel> list2 = DataGenerator.generateData2(list);
+                    myDataAdapter.onBind(DataGenerator.generateData2(list));
+                    recyclerView.setAdapter(myDataAdapter);
+                }
+            });
+            System.out.println(list_fav.size()+" rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+        }
+        else{
+            myDataAdapter.onBind(DataGenerator.generateData(pokemonList));
+            recyclerView.setAdapter(myDataAdapter);
+        }
+    }
+*/
     private void recyclerViewChangeLayout() {
         if (recyclerviewLayout){
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -185,7 +224,6 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
     private void updateUIWhenfinishHTTPRequest(List<Pokemon> response) {
         this.textView.setText("done");
         this.textView.setVisibility(View.INVISIBLE);
-        //myDataAdapter.onBind(DataGenerator.generateData(pokemonList));
     }
 
 }

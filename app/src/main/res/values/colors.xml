@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#EB2224</color>
+    <color name="colorHomeFav">#FFFFFF</color>
     <color name="colorPrimaryDark">#BB0A0C</color>
     <color name="colorTextAndIdItemRecyclerview">#F80C0F</color>
     <color name="colorTableLight">#EB8687</color>

@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
+
 @Entity
 public class PokemonEntity {
     @NonNull
@@ -17,6 +19,12 @@ public class PokemonEntity {
         id = id;
         name = name;
         img = img;
+    }
+
+    public PokemonEntity(Pokemon pokemon) {
+        id = pokemon.getId();
+        name = pokemon.getName();
+        img = pokemon.getSprites().getFrontDefault();
     }
 
     public int getId() {

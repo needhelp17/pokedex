@@ -108,6 +108,7 @@ public class FragmentStatAndCatch extends Fragment implements PokemonCalls.Callb
     }
     public void reload(int id){
         PokemonCalls.fetchPokemonById(this,id);
+        EncounterCall.fetchEncounter(this,id);
     }
 
     @Override
@@ -116,27 +117,23 @@ public class FragmentStatAndCatch extends Fragment implements PokemonCalls.Callb
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerViewEncounter.setAdapter(adapterEncounter);
         recyclerViewEncounter.setLayoutManager(layoutManager);
-        rootView.findViewById(R.id.statBar).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.textView3).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(include.getVisibility()==View.VISIBLE){
-                    include.setVisibility(View.INVISIBLE);
+                    include.setVisibility(View.GONE);
                     rootView.findViewById(R.id.imageArrow).setBackgroundResource(R.drawable.arrow_down);
-                    rootView.findViewById(R.id.textViewEncounter).setTop(rootView.findViewById(R.id.statBar).getBottom());
+                    ViewGroup.LayoutParams params=recyclerViewEncounter.getLayoutParams();
+                    params.height=850;
+                    recyclerViewEncounter.setLayoutParams(params);
                 }
                 else{
                     include.setVisibility(View.VISIBLE);
                     rootView.findViewById(R.id.imageArrow).setBackgroundResource(R.drawable.arrow_up);
-
-                }
+                    ViewGroup.LayoutParams params=recyclerViewEncounter.getLayoutParams();
+                    params.height=500;
+                    recyclerViewEncounter.setLayoutParams(params);                }
             }
         });
-        /*TextView tv = getActivity().findViewById(R.id.textView5);
-        if (encounters.size()!=0){
-            String text = String.valueOf(encounters.size())+"  example : "+encounters.get(0).location_area.name;
-            tv.setText(text);
-        }
-        else
-            tv.setText("nowhere");*/
     }
 
     @Override

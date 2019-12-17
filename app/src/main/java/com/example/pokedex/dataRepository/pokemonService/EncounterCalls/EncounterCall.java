@@ -42,6 +42,7 @@ public class EncounterCall {
             @Override
             public void onFailure(Call<List<Encounter>> call, Throwable t) {
                 System.out.println("oups ici");
+                System.out.println(t.getMessage());
                 if (callbacksWeakReference.get() != null)
                     callbacksWeakReference.get().onFailure();
             }

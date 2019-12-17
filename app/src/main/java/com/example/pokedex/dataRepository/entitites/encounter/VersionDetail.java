@@ -1,12 +1,16 @@
 package com.example.pokedex.dataRepository.entitites.encounter;
 
 import com.example.pokedex.dataRepository.entitites.pokemon.Version;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class VersionDetail {
 
     private Version version;
     private int max_chance;
-    private EncounterDetail encounterDetail;
+    @SerializedName("encounter_details")
+    private List<EncounterDetail> encounter_Details;
 
     public Version getVersion() {
         return version;
@@ -24,11 +28,11 @@ public class VersionDetail {
         this.max_chance = max_chance;
     }
 
-    public EncounterDetail getEncounterDetail() {
-        return encounterDetail;
+    public List<EncounterDetail> getEncounterDetail() {
+        return encounter_Details;
     }
 
-    public void setEncounterDetail(EncounterDetail encounterDetail) {
-        this.encounterDetail = encounterDetail;
+    public void setEncounterDetail(List<EncounterDetail> encounterDetail) {
+        this.encounter_Details = encounterDetail;
     }
 }
