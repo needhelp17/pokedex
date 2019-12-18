@@ -116,6 +116,12 @@ public class FragmentStatAndCatch extends Fragment implements PokemonCalls.Callb
         AdapterEncounter adapterEncounter = new AdapterEncounter(encounters);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerViewEncounter.setAdapter(adapterEncounter);
+        if (encounters.size()==0){
+            rootView.findViewById(R.id.noEncounterArea).setVisibility(View.VISIBLE);
+        }
+        else{
+            rootView.findViewById(R.id.noEncounterArea).setVisibility(View.INVISIBLE);
+        }
         recyclerViewEncounter.setLayoutManager(layoutManager);
         rootView.findViewById(R.id.textView3).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

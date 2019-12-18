@@ -105,14 +105,22 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
             pokemonViewModel.getfavoris().observe(this, new Observer<List<Integer>>() {
                 @Override
                 public void onChanged(List<Integer> list) {
-                    list_fav.clear();
-                    for(Pokemon p : pokemonList){
-                        if (list.contains(p.getId())){
-                            list_fav.add(p);
+                    if (is_on_fav) {
+                        list_fav.clear();
+                        for (Pokemon p : pokemonList) {
+                            if (list.contains(p.getId())) {
+                                list_fav.add(p);
+                            }
                         }
+                        if (list_fav.size()==0){
+                            findViewById(R.id.noFav).setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            findViewById(R.id.noFav).setVisibility(View.INVISIBLE);
+                        }
+                        myDataAdapter.onBind(DataGenerator.generateData(list_fav));
+                        //recyclerView.setAdapter(myDataAdapter);
                     }
-                    myDataAdapter.onBind(DataGenerator.generateData(list_fav));
-                    //recyclerView.setAdapter(myDataAdapter);
                 }
             });
         }
