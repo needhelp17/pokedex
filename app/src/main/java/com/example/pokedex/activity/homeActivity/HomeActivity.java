@@ -125,6 +125,7 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
             });
         }
         else{
+            findViewById(R.id.noFav).setVisibility(View.INVISIBLE);
             myDataAdapter.onBind(DataGenerator.generateData(pokemonList));
            // recyclerView.setAdapter(myDataAdapter);
         }
