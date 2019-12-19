@@ -21,7 +21,6 @@ public class EncounterCall {
     }
 
     public static void fetchEncounter(Fragment callbacks, int pokemonId){
-        System.out.println("lancé");
         final WeakReference<EncounterCall.Callbacks> callbacksWeakReference = new WeakReference<EncounterCall.Callbacks>((EncounterCall.Callbacks) callbacks);
         PokemonService pokemonService = PokemonService.retrofit.create(PokemonService.class);
         Call<List<Encounter>> call = pokemonService.getEncounter(pokemonId);
@@ -30,7 +29,6 @@ public class EncounterCall {
             @Override
             public void onResponse(Call<List<Encounter>> call, Response<List<Encounter>> response) {
                 if (callbacksWeakReference.get() != null) {
-                    System.out.println("maintenant ici");
                     /*List<Encounter> listencounter = new ArrayList<>();
                     for (int i = 0; i < response.body().getEncounters().size(); i++) {
                         listencounter.add(res);
@@ -41,8 +39,6 @@ public class EncounterCall {
 
             @Override
             public void onFailure(Call<List<Encounter>> call, Throwable t) {
-                System.out.println("oups ici");
-                System.out.println(t.getMessage());
                 if (callbacksWeakReference.get() != null)
                     callbacksWeakReference.get().onFailure();
             }

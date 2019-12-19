@@ -244,8 +244,6 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
     }
     @Override
     public void onRestart() {
-        displaySnackBar("list : "+myDataAdapter.getItemCount());
-        System.out.println(is_on_fav);
         changeData(is_on_fav?"All":"Fav");
         super.onRestart();
     }

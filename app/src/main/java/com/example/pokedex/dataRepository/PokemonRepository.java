@@ -42,7 +42,6 @@ public class PokemonRepository {
 
         @Override
         protected Void doInBackground(final PokemonEntity... params) {
-            System.out.println("insert :  id : "+params[0].getId()+" name : "+params[0].getName()+" img : "+params[0].getImg());
             mAsyncTaskDao.addPokemonToFavorites(params[0]);
             return null;
         }
@@ -83,7 +82,6 @@ public class PokemonRepository {
         @Override
         protected Void doInBackground(final PokemonEntity... params) {
             mAsyncTaskDao.deletePokemonFromFavorites(params[0]);
-            System.out.println("delete : "+params[0].getId());
             return null;
         }
     }
