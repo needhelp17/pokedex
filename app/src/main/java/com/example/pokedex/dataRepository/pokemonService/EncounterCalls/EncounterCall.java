@@ -20,6 +20,11 @@ public class EncounterCall {
         void onFailure();
     }
 
+    /**
+     * get the encounter
+     * @param callbacks the callback to launch
+     * @param pokemonId the id of the pokemon
+     */
     public static void fetchEncounter(Fragment callbacks, int pokemonId){
         final WeakReference<EncounterCall.Callbacks> callbacksWeakReference = new WeakReference<EncounterCall.Callbacks>((EncounterCall.Callbacks) callbacks);
         PokemonService pokemonService = PokemonService.retrofit.create(PokemonService.class);

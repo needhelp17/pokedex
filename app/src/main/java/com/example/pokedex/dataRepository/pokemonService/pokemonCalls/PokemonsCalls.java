@@ -21,6 +21,10 @@ public class PokemonsCalls {
         void onFailure();
     }
 
+    /**
+     * ask the pokemon of the first generation to the api
+     * @param callbacks the callback to launch
+     */
     public static void fetchPokemonFirstGen(PokemonsCalls.Callbacks callbacks) {
 
         final WeakReference<PokemonsCalls.Callbacks> callbacksWeakReference = new WeakReference<>(callbacks);

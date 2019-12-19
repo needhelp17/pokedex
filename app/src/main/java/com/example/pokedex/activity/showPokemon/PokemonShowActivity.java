@@ -35,6 +35,9 @@ public class PokemonShowActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * launch the 2 fragments
+     */
     private void setupViewPagerAndTabs() {
         final FragmentShowDetails fragmentShowDetails = new FragmentShowDetails(id,is_on_fav);
         final FragmentStatAndCatch fragmentStatAndCatch = new FragmentStatAndCatch(id);
@@ -60,12 +63,6 @@ public class PokemonShowActivity extends AppCompatActivity {
                 return fragmentStatAndCatch.TAB_NAME;
             }
         });
-
-
-        //TODO we want two fragments with layouts : fragment_one, fragment_two.
-
-        //TODO set adapter to viewpager and handle fragment change inside
-        //viewpager.setAdapter(...);
 
     }
 

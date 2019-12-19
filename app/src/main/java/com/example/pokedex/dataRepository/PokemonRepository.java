@@ -23,11 +23,19 @@ public class PokemonRepository {
     }
 
 
+    /**
+     * get all favorites
+     * @return the favorites
+     */
     public LiveData<List<Integer>> getAllfavoritesPokemons() {
         return pokemonDAO.getFavoriteIdList();
     }
 
 
+    /**
+     * add pokemon from favorites
+     * @param pokemonEntity
+     */
     public void insert(PokemonEntity pokemonEntity) {
         new PokemonRepository.insertAsyncTask(pokemonDAO).execute(pokemonEntity);
     }
@@ -68,6 +76,10 @@ public class PokemonRepository {
     }
 
 
+    /**
+     * delete a pokemon from favorites
+     * @param pokemonEntity the pokemon
+     */
     public void deletePokemon(PokemonEntity pokemonEntity) {
         new PokemonRepository.deletePokemonAsyncTask(pokemonDAO).execute(pokemonEntity);
     }

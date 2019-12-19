@@ -80,6 +80,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    /**
+     * @param newdataset
+     * for re create the item when the dataset change
+     */
     // Replace the contents of a view (invoked by the layout manager)
     public void onBind(List<PokemonViewModel> newdataset) {
         pokemonViewModelList.clear();
@@ -129,6 +133,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         }
 
+        /**
+         * to display data of the item
+         * @param pokemonViewModel the data to display
+         */
         public void updatePokemon(PokemonViewModel pokemonViewModel) {
             nameTextView.setText(pokemonViewModel.getName());
             idTextView.setText(String.valueOf(pokemonViewModel.getId()));
@@ -138,6 +146,9 @@ public class MyDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     .into(iconImageView);
         }
 
+        /**
+         * setup the on click
+         */
         private void setupListeners(){
             pokemonButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -176,6 +187,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         }
 
+        /**
+         * to display data of the item
+         * @param pokemonViewModel the data to display
+         */
         public void updatePokemon(PokemonViewModel pokemonViewModel) {
             nameTextView.setText(pokemonViewModel.getName());
             idTextView.setText(String.valueOf(pokemonViewModel.getId()));
@@ -185,6 +200,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     .into(iconImageView);
         }
 
+
+        /**
+         * setup the onclick
+         */
         private void setupListeners(){
             pokemonButton.setOnClickListener(new View.OnClickListener() {
                 @Override

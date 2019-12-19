@@ -21,6 +21,11 @@ public class PokemonCalls {
         void onFailure();
     }
 
+    /**
+     * get pokemon
+     * @param callbacks the callback to launch
+     * @param pokemonName the name of the pokemon
+     */
     public static void fetchPokemonByName(Activity callbacks, String pokemonName){
 
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>((Callbacks) callbacks);
@@ -42,6 +47,11 @@ public class PokemonCalls {
         });
     }
 
+    /**
+     * get pokemon
+     * @param callbacks the callback to launch
+     * @param pokemonId the id of the pokemon
+     */
     public static void fetchPokemonById(Fragment callbacks, int pokemonId){
 
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>((Callbacks) callbacks);

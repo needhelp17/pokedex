@@ -6,6 +6,9 @@ import com.example.pokedex.dataRepository.entitites.pokemon.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * generate data for adapter
+ */
 public class DataGenerator {
     public static List<PokemonViewModel> generateData(List<Pokemon> pokemons) {
         List<PokemonViewModel> pokemonViewModelList = new ArrayList<>();

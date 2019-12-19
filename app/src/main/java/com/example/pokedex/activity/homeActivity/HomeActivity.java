@@ -65,11 +65,22 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
         setupRecyclerView();
     }
 
+    /**
+     * create the menu
+     * @param menu
+     * @return
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_mode_menu, menu);
         return true;
     }
 
+
+    /**
+     * allow use of item's menu
+     * @param item
+     * @return
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_layout:
@@ -99,6 +110,7 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
     }
 
 
+
     private void changeData(String type){
         if (type.equals("All")){
             PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
@@ -112,13 +124,14 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
                                 list_fav.add(p);
                             }
                         }
+                        myDataAdapter.onBind(DataGenerator.generateData(list_fav));
                         if (list_fav.size()==0){
                             findViewById(R.id.noFav).setVisibility(View.VISIBLE);
                         }
                         else{
                             findViewById(R.id.noFav).setVisibility(View.INVISIBLE);
                         }
-                        myDataAdapter.onBind(DataGenerator.generateData(list_fav));
+
                         //recyclerView.setAdapter(myDataAdapter);
                     }
                 }
@@ -131,6 +144,9 @@ public class HomeActivity extends AppCompatActivity implements PokemonActionInte
         }
     }
 
+    /**
+     * change the layout of the recycler_view
+     */
     private void recyclerViewChangeLayout() {
         if (recyclerviewLayout){
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {

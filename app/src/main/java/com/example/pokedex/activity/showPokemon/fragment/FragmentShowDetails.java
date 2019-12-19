@@ -123,6 +123,11 @@ public class FragmentShowDetails extends Fragment implements PokemonCalls.Callba
         });
     }
 
+    /**
+     * chznge the image on click
+     * @param v the imageview
+     * @param is_shiny the switch is on or not
+     */
     public void changeImg(View v, Boolean is_shiny) {
         String url_to_set = "";
         if (!is_shiny) {

@@ -62,6 +62,10 @@ public class AdapterEncounter extends RecyclerView.Adapter<RecyclerView.ViewHold
             method = v.findViewById(R.id.method);
         }
 
+        /**
+         * to update the item with the data of encounter
+         * @param encounter
+         */
         public void update(Encounter encounter){
             road.setText("road : "+encounter.getLocation_area().name.replace("-"," "));
             List<String> versions = new ArrayList<>();
